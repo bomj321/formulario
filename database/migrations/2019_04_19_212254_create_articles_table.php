@@ -33,7 +33,7 @@ class CreateArticlesTable extends Migration
             $table->tinyinteger('enabled')->default('1');
             $table->tinyinteger('flag_inventory')->default('1');
             $table->integer('retro_days');
-            $table->date('date_mov_integer')->nullable($value = true);
+            $table->date('date_mov_int')->nullable($value = true);
             $table->string('comment', 11)->nullable($value = true);
             $table->integer('stk_min_alert')->default('99999');
             $table->integer('idtransaction')->nullable($value = true);
