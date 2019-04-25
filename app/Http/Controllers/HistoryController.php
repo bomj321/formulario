@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\History;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HistoryController extends Controller
 {
@@ -14,9 +15,20 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $histories = History::all();
 
-        return view('histories.index',compact('histories'));
+        $histories = DB::table('histories')
+            ->join('articles', 'histories.item_id', '=', 'articles.id')
+            ->join('transanction_types', 'histories.transaction_type_id', '=', 'transanction_types.id')
+            ->select('histories.id as id_history','histories.item_id as item_id','transanction_types.*', 'articles.*')
+            ->groupBy('item_id')  
+            ->get();
+
+
+        $transanction_types = DB::table('transanction_types')           
+            ->get();           
+
+
+        return view('histories.index',compact('histories','transanction_types'));
     }
 
     /**

@@ -7,42 +7,56 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="card-header">
-                        Seccion de Muestra                
+                        Seccion de Reportes                
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-striped table-sm" id="history_table">
+                    <table class="table stripe row-border order-column" id="history_table" style="max-width: 100%;">
                               <thead>
                                 <tr>
-                                  <th scope="col">ID</th>
-                                  <th scope="col">Administrador del Area</th>
-                                  <th scope="col">Descripción de la Venta</th>
-                                  <th scope="col">#Trabajadores</th>
-                                  <th scope="col">Precio</th>
-                                  <th scope="col">Acciones</th>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                    @foreach($transanction_types as $transanction_type)
+                                     <th>{{ $transanction_type->name }}</th>
+                                    @endforeach
+                                   
+
+
+
                                 </tr>
                               </thead>
                               <tbody>
-                                    @foreach ($histories as $history)
+
+                                 @foreach ($histories as $history)
                                         <tr>
-                                          <th scope="row">{{ $history->id }}</th>
-                                          <td>{{ $history->transaction_id }}</td>
-                                          <td>{{ $history->item_id }}</td>
-                                          <td>{{ $history->transaction_type_id }}</td>
-                                          <td>{{ $history->transaction_line_iid }}</td>
-                                          <td>                                           
-                                              <a href="" class="btn btn-info btn-sm">
-                                                  <span class="material-icons">edit</span>
-                                              </a>
-                                               
-                                              <a href="" class="btn btn-danger btn-sm">
-                                                   <span class="material-icons">delete</span>
-                                              </a>
-                                              
-                                             
-                                          </td>
-                                        </tr>                                        
-                                    @endforeach    
+                                              <th>{{ $history->mat_edtc }}</th>
+                                              <th>{{ $history->description }}</th>
+
+                                              @foreach($transanction_types as $transanction_type)
+                                                     <th>
+                                                             <?php 
+                                                             $historia = DB::table('histories')
+                                                                   ->select(DB::raw('count(transaction_type_id) as transaction_type_count'))
+                                                                   ->where('item_id', '=', $history->item_id)
+                                                                   ->where('transaction_type_id','=', $transanction_type->id)
+                                                                   ->first(); 
+
+                                                              if (!empty($historia->transaction_type_count) AND isset($historia->transaction_type_count))
+                                                                   {
+                                                                
+                                                                     echo $historia->transaction_type_count;
+
+                                                                   }else{
+
+                                                                     echo '0';
+
+                                                                   }
+                                                            ?>
+                                                    </th> 
+                                              @endforeach
+
+                                       </tr>                                        
+                                 @endforeach
                               </tbody>
                     </table>
                              
