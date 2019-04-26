@@ -1,26 +1,21 @@
+$(document).ready( function () {
+    $('#history_table').DataTable({    	
+    	 "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        },
 
-/****BOOTSTRAP****/
-require('./jquery');
-require('./popper');
-require('./bootstrap');
-/****BOOTSTRAP****/
+        dom: 'Bfrtip',
+        buttons: [
+            'excel'
+        ],
+        scrollY:        "300px",
+        scrollX:        true,
+        scrollCollapse: true,
+        paging:         false,
+        fixedColumns:   {
+            leftColumns: 2
+        }
 
 
-/****DATATABLES****/
-require('./jquery-dt');
-require('./dt-bt');
-require('./dt-fx');
-/****DATATABLES****/
-
-
-/****SCRIPT FOR EXPORTS THE TABLE****/
-
-require('./dt-button');
-require('./dt-flash');
-require('./dt-jszip');
-require('./dt-pdfmake');
-require('./dt-vfs');
-require('./dt-html5');
-require('./dt-print');
-/****SCRIPT FOR EXPORTS THE TABLE****/ 
-
+    });
+} );

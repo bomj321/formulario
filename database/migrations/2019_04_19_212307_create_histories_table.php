@@ -13,7 +13,7 @@ class CreateHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('histories', function (Blueprint $table) {
+        Schema::create('Inv_material_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('transaction_id')->unsigned();
             $table->integer('item_id');
@@ -32,8 +32,8 @@ class CreateHistoriesTable extends Migration
             $table->integer('last_updated_by')->unsigned();
             $table->timestamps();
 
-            $table->foreign('item_id')->references('id')->on('articles')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('transaction_type_id')->references('id')->on('transanction_types')->onDelete('cascade')->onUpdate('cascade');     
+            $table->foreign('item_id')->references('id')->on('Inv_items')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('transaction_type_id')->references('id')->on('Inv_transaction_types')->onDelete('cascade')->onUpdate('cascade');     
 
         });        
     }
@@ -45,7 +45,7 @@ class CreateHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('histories');
+        Schema::dropIfExists('Inv_material_transactions');
     }
 
 }

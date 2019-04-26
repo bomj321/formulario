@@ -13,7 +13,7 @@ class CreateTransanctionTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('transanction_types', function (Blueprint $table) {
+        Schema::create('Inv_transaction_types', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->string('name', 50)->unique();
             $table->string('code', 50)->unique();
@@ -35,7 +35,7 @@ class CreateTransanctionTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transanction_types');
+        Schema::dropIfExists('Inv_transaction_types');
     }
 
 }

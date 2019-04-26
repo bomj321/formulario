@@ -13,7 +13,7 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('Inv_items', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('idcontrol')->nullable($value = true);
             $table->integer('idcentercost')->nullable($value = true);
@@ -53,7 +53,7 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('Inv_items');
     }
 
  

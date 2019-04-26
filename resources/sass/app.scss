@@ -1,6 +1,3 @@
-//BOOTSTRAP
-@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -8,17 +5,20 @@
 @import 'variables';
 
 
-//JQUERY FROM DATATABLE
-@import url('https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css');
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
 
 
-//DATATABLE FIXED COLUMNS
-@import url('https://cdn.datatables.net/fixedcolumns/3.2.6/css/fixedColumns.dataTables.min.css');
+.buttons-excel{
+	background: green !important;
+	color: white !important;
+}
 
 
-//CSS FOR BUTTONS OF DATATABLES
-@import url('https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css');
-
-
-//CUSTOM STYLES
-@import 'custom';
+ th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+    }

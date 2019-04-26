@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table class="table stripe row-border order-column" id="history_table" style="max-width: 100%;">
+                    <table class="stripe row-border order-column" id="history_table" style="max-width: 100%;">
                               <thead>
                                 <tr>
                                     <th>Código</th>
@@ -19,6 +19,7 @@
                                     @foreach($transanction_types as $transanction_type)
                                      <th>{{ $transanction_type->name }}</th>
                                     @endforeach
+                                    <th>Total de Transacciones</th>
                                    
 
 
@@ -31,11 +32,12 @@
                                         <tr>
                                               <th>{{ $history->mat_edtc }}</th>
                                               <th>{{ $history->description }}</th>
-
+                                              <?php $sum_total = 0 ?>
                                               @foreach($transanction_types as $transanction_type)
                                                      <th>
                                                              <?php 
-                                                             $historia = DB::table('histories')
+                                                            
+                                                             $historia = DB::table('inv_material_transactions')
                                                                    ->select(DB::raw('count(transaction_type_id) as transaction_type_count'))
                                                                    ->where('item_id', '=', $history->item_id)
                                                                    ->where('transaction_type_id','=', $transanction_type->id)
@@ -45,15 +47,15 @@
                                                                    {
                                                                 
                                                                      echo $historia->transaction_type_count;
+                                                                     $sum_total+= $historia->transaction_type_count;
 
                                                                    }else{
-
                                                                      echo '0';
-
                                                                    }
                                                             ?>
-                                                    </th> 
+                                                    </th>                                                     
                                               @endforeach
+                                              <th>{{ $sum_total }}</th>
 
                                        </tr>                                        
                                  @endforeach
