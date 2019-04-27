@@ -70,7 +70,7 @@
 
 
                                  <li class="nav-item">
-                                    <a class='nav-link' href="">Generar Factura</a>
+                                    <a class='nav-link' href="{{ route('bills.index') }}">Generar Factura</a>
                                 </li>
 
                     </ul>                  

@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "datatables": "^1.10.18"
+        "datatables": "^1.10.18",
+        "material-icons": "^0.3.1"
     }
 }
