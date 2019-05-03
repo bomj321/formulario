@@ -159,7 +159,23 @@ $(document).ready(function () {
     $(this).closest("tr").remove();
     sumar();
   });
+
+  function sumar() {
+    subtotal = 0;
+    $("#tbsales tbody tr").each(function () {
+      subtotal = subtotal + Number($(this).find("td:eq(3)").text());
+    });
+    igv_item = 0;
+    $("#tbsales tbody tr").each(function () {
+      igv_item = igv_item + Number($(this).find("td:eq(4)").text());
+    });
+    var total_de_factura = subtotal + igv_item;
+    $("#total_linea").val(subtotal);
+    $("#total_igv").val(igv_item);
+    $("#total_factura").val(total_de_factura);
+  }
   /****FUNCIONES PARA RESUMIR****/
+
 
   $("#inventory_item_id").change(function () {
     var value = $("#inventory_item_id").val();
@@ -185,9 +201,12 @@ $(document).ready(function () {
     var tax_selected = $("#tax_id option:selected").text();
     var tax_selected_number = tax_selected.match(/\d/g).join("");
     var category_id = $('#category_id').val();
-    var inventory_item_id = $('#inventory_item_id').val();
-    var id_uom = $('#id_uom').val();
+    var inventory_item_id = $("#inventory_item_id option:selected").text();
+    var id_uom = $("#id_uom option:selected").text();
     var quantity_invoiced = $('#quantity_invoiced').val();
+    var quantity_item = $('#quantity_item').val();
+    var igv = quantity_item * tax_selected_number / 100;
+    var monto_inafecto = Number(quantity_item) + Number(igv);
     /***INPUTS WITH INFORMATION***/
 
     if (inventory_item_id == '') {
@@ -207,9 +226,11 @@ $(document).ready(function () {
     /*********PLANTILLA PARA LA TABLA************/
 
 
-    var plantilla_tabla = "\n<tr>\n\n<td>\n<input class='input_venta form-control' readonly ></input>\n<input type='hidden'   name='id_producto[]'></input>\n<input type='hidden'   name='comentario_venta[]'></input>\n\n</td>\n\n\n<td><input class='input_venta form-control' name='cantidad_comprado_producto[]' readonly ></input></td>\n\n<td><input class='input_venta form-control' name='cantidad_comprado_producto[]' readonly ></input></td>\n\n\n<td><input class='input_venta form-control' readonly  value=''></input></td>\n\n<td><button type='button' class='btn btn-danger btn-block btn-remove-producto '>Eliminar</button></td>\n\n</tr>\n";
+    var plantilla_tabla = "\n<tr>\n\n<td class=\"text-center\">\n<strong>".concat(inventory_item_id, "</strong>\n<input type='hidden' name='quantity_invoiced[]' ></input>\n<input type='hidden' name='comentario_venta[]'></input>\n\n</td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_invoiced, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(id_uom, "</strong></td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_item, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(igv, "</strong></td>\n<td class=\"text-center\"><strong>").concat(monto_inafecto, "</strong></td>\n\n\n<td><button type='button' class='btn btn-danger btn-block btn-remove-producto '>Eliminar</button></td>\n\n</tr>\n");
     $("#tbsales tbody").prepend(plantilla_tabla);
     /*********PLANTILLA PARA LA TABLA************/
+
+    sumar();
   });
   /***JAVASCRIPT OF FORMULARY***/
 });

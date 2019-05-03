@@ -228,39 +228,31 @@
 			      <th scope="col">Cantidad</th>
 			      <th scope="col">Medida</th>
 			      <th scope="col">Subtotal</th>
+			      <th scope="col">IGV</th>
+			      <th scope="col">Monto Inafecto</th>
 			      <th scope="col">Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			   
 			    <tr>
-			     <td colspan="4"></td>
+			     <td colspan="7"></td>
       			
+			    </tr>		   			   
+
+			    <tr>
+			     <td colspan="6"><strong class="float-right">Total Lineas:</strong></td>
+      			 <td><input class='input_venta form-control' readonly id="total_linea"></td>
 			    </tr>
 
 			    <tr>
-			     <td colspan="4"><strong class="float-right">IGV:</strong></td>
-      			 <td><strong>5000</strong></td>
+			     <td colspan="6"><strong class="float-right">Total igv:</strong></td>
+      			 <td><input class='input_venta form-control' readonly id="total_igv"></td>
 			    </tr>
 
 			    <tr>
-			     <td colspan="4"><strong class="float-right">Monto Inafecto:</strong></td>
-      			 <td><strong>2000</strong></td>
-			    </tr>
-
-			    <tr>
-			     <td colspan="4"><strong class="float-right">Total Lineas:</strong></td>
-      			 <td><strong>1784</strong></td>
-			    </tr>
-
-			    <tr>
-			     <td colspan="4"><strong class="float-right">Total igv:</strong></td>
-      			 <td><strong>1287</strong></td>
-			    </tr>
-
-			    <tr>
-			     <td colspan="4"><strong class="float-right">Total Factura:</strong></td>
-      			 <td><strong>4893</strong></td>
+			     <td colspan="6"><strong class="float-right">Total Factura:</strong></td>
+      			 <td><input class='input_venta form-control' readonly id="total_factura"></td>
 			    </tr>
 			  </tbody>
 		</table>		
