@@ -30,7 +30,11 @@
 
     <script src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
 <!--FIXED COLUMNS-->
-   
+
+<!--TOASTR-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!--TOASTR-->
+
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
@@ -49,6 +53,10 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.6/css/fixedColumns.dataTables.min.css">    
 <!--BUTTONS AND FIXED COLUMNS-->
+
+<!--TOASTR CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">    
+<!--TOASTR CSS-->
 
     <!-- Styles -->    
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

@@ -30,17 +30,18 @@ Route::get('/', 'HistoryController@index')->name('histories');
 
     Route::put('bills/{role}', 'ap_invoices_allController@update')
 	->name('bills.update');
-
-
-    Route::post('bills/{role}', 'ap_invoices_allController@show')
-	->name('bills.show');
-
-
-    Route::get('bills/{role}', 'ap_invoices_allController@destroy')
-	->name('bills.destroy');
-
+   
 
     Route::get('bills/{role}/edit', 'ap_invoices_allController@edit')
 	->name('bills.edit');
 
 /**********BILLS****************/
+
+/******ROUTE FOR AJAX CALLS******/
+Route::post('bills/vendorid', 'ap_invoices_allController@vendorid')
+	->name('bills.vendorid');
+
+Route::post('bills/inventoryitemid', 'ap_invoices_allController@inventoryitemid')
+	->name('bills.inventoryitemid');
+
+/******ROUTE FOR AJAX CALLS******/
