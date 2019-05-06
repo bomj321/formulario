@@ -255,7 +255,7 @@ $(document).ready(function () {
     /*********PLANTILLA PARA LA TABLA************/
 
 
-    var plantilla_tabla = "\n<tr>\n\n<td class=\"text-center\">\n<strong>".concat(inventory_item_id, "</strong>\n<input type='hidden' name='tax_id_input[]' value='").concat(tax_id, "'></input>\n<input type='hidden' name='category_id_input[]' value='").concat(category_id, "'></input>\n<input type='hidden' name='inventory_item_id_input[]' value='").concat(inventory_item_id, "'></input>\n<input type='hidden' name='item_description_input[]' value='").concat(item_description, "'></input>\n<input type='hidden' name='id_uom_input[]' value='").concat(id_uom, "'></input>\n<input type='hidden' name='quantity_invoiced_input[]' value='").concat(quantity_invoiced, "'></input>\n<input type='hidden' name='quantity_item_input[]' value='").concat(quantity_item, "'></input>\n\n</td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_invoiced, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(id_uom, "</strong></td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_item, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(igv, "</strong></td>\n<td class=\"text-center\"><strong>").concat(monto_inafecto, "</strong></td>\n\n\n<td><button type='button' class='btn btn-danger btn-block btn-remove-producto '>Eliminar</button></td>\n\n</tr>\n");
+    var plantilla_tabla = "\n<tr>\n\n<td class=\"text-center\">\n<strong>".concat(inventory_item_id, "</strong>\n<input type='hidden' name='tax_id_input[]' value='").concat(tax_id, "'></input>\n<input type='hidden' name='category_id_input[]' value='").concat(category_id, "'></input>\n<input type='hidden' name='inventory_item_id_input[]' value='").concat(inventory_item_id, "'></input>\n<input type='hidden' name='item_description_input[]' value='").concat(item_description, "'></input>\n<input type='hidden' name='id_uom_input[]' value='").concat(id_uom, "'></input>\n<input type='hidden' name='quantity_invoiced_input[]' value='").concat(quantity_invoiced, "'></input>\n<input type='hidden' name='quantity_item_input[]' value='").concat(quantity_item, "'></input>\n</td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_invoiced, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(id_uom, "</strong></td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_item, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(igv, "</strong></td>\n<td class=\"text-center\"><strong>").concat(monto_inafecto, "</strong></td>\n\n\n<td><button type='button' class='btn btn-danger btn-block btn-remove-producto '>Eliminar</button></td>\n\n</tr>\n");
     $("#tbsales tbody").prepend(plantilla_tabla);
     /*********PLANTILLA PARA LA TABLA************/
 
@@ -266,6 +266,7 @@ $(document).ready(function () {
     var ruc = $('#segment1').val();
     var invoice_num = $('#Invoice_num').val();
     var glosa = $('#description').val();
+    var invoice_amount = $('#invoice_amount').val();
     /***INPUTS WITH INFORMATION***/
 
     if (ruc == '') {
@@ -283,6 +284,63 @@ $(document).ready(function () {
       return false;
     }
 
+    if (invoice_amount == '') {
+      toastr.error('Debes Ingresar un Importe');
+      return false;
+    }
+
+    var venta = {
+      Client_id: $('select[name="Client_id"]').val(),
+      document_id: $('select[name="document_id"]').val(),
+      Vendor_id: $('select[name="Vendor_id"]').val(),
+      segment1: $('input[name="segment1"]').val(),
+      Invoice_num: $('input[name="Invoice_num"]').val(),
+      Invoice_date: $('input[name="Invoice_date"]').val(),
+      invoice_currency_code: $('select[name="invoice_currency_code"]').val(),
+      invoice_amount: $('input[name="invoice_amount"]').val(),
+      exchange_rate: $('input[name="exchange_rate"]').val(),
+      description: $('input[name="description"]').val(),
+      tax_id_input: $('input[name="tax_id_input[]"]').map(function () {
+        return $(this).val();
+      }).get(),
+      category_id_input: $('input[name="category_id_input[]"]').map(function () {
+        return $(this).val();
+      }).get(),
+      inventory_item_id_input: $('input[name="inventory_item_id_input[]"]').map(function () {
+        return $(this).val();
+      }).get(),
+      item_description_input: $('input[name="item_description_input[]"]').map(function () {
+        return $(this).val();
+      }).get(),
+      id_uom_input: $('input[name="id_uom_input[]"]').map(function () {
+        return $(this).val();
+      }).get(),
+      quantity_invoiced_input: $('input[name="quantity_invoiced_input[]"]').map(function () {
+        return $(this).val();
+      }).get(),
+      quantity_item_input: $('input[name="quantity_item_input[]"]').map(function () {
+        return $(this).val();
+      }).get()
+    };
+    $.ajax({
+      url: 'store',
+      type: "POST",
+      dataType: 'json',
+      data: venta,
+      beforeSend: function beforeSend() {
+        toastr.warning('Realizando Venta Espere...');
+        toastr.clear();
+      },
+      success: function success(resp) {
+        toastr.success(resp.message, 'Venta');
+        setTimeout(function () {
+          location.reload();
+        }, 2000);
+      },
+      error: function error() {
+        toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!');
+      }
+    });
     return false;
   });
   /***JAVASCRIPT OF FORMULARY***/

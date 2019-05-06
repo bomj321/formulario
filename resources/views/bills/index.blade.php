@@ -28,7 +28,7 @@
                                                 <th scope="row">{{ $bill->id }}</th>
                                                 <td>{{ $bill->Client_id }}</td>
                                                 <td>{{ $bill->document_id }}</td>
-                                                <td>{ $bill->Vendor_id }}</td>
+                                                <td>{{ $bill->Vendor_id }}</td>
                                                 <td>
                                                     <a href="{{ route('bills.edit', $bill->id) }}" class="btn btn-info btn-sm">
                                                         <span class="material-icons">edit</span>

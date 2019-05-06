@@ -48,6 +48,11 @@ class ap_invoices_allController extends Controller
 
     }
 
+    public function show($client)
+    {
+       
+    }
+
     public function vendorid(Request $request)
     {   
 
@@ -98,7 +103,50 @@ class ap_invoices_allController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+         DB::table('ap_invoices_all')->insert([
+                         [
+                             'Client_id'              => $request->Client_id, 
+                             'document_id'            => $request->document_id, 
+                             'Vendor_id'              => $request->Vendor_id, 
+                             'segment1'               => $request->segment1, 
+                             'Invoice_num'            => $request->Invoice_num,
+                             'Invoice_date'           => $request->Invoice_date, 
+                             'invoice_currency_code'  => $request->invoice_currency_code, 
+                             'invoice_amount'         => $request->invoice_amount, 
+                             'exchange_rate'          => $request->exchange_rate, 
+                             'description'            => $request->description,
+                             'exchange_date'          => date('Y-m-d')
+                         ]                       
+            ]);
+
+        /**OBTAIN ID FROM LAST INSERT**/
+            $last_id = DB::getPdo()->lastInsertId();
+        /**OBTAIN ID FROM LAST INSERT**/
+
+        for ($i=0; $i <count($request->tax_id_input) ; $i++) { 
+                DB::table('ap_invoice_lines_all')->insert([
+                         [
+                              'invoice_id'         => $last_id,
+                              'tax_id'             => $request->tax_id_input[$i], 
+                              'category_id'        => $request->category_id_input[$i], 
+                              'inventory_item_id'  => $request->inventory_item_id_input[$i], 
+                              'item_description'   => $request->item_description_input[$i], 
+                              'id_uom'             => $request->id_uom_input[$i],
+                              'quantity_invoiced'  => $request->quantity_invoiced_input[$i],
+                              'amount'             => $request->quantity_item_input[$i],                                  
+                         ]                       
+                ]); 
+        }
+      
+
+
+
+         $data = [          
+          'message'      => 'Venta Realizada',
+        ];
+
+        return response()->json($data);
     }
 
     /**

@@ -27,12 +27,15 @@ Route::get('/', 'HistoryController@index')->name('histories');
     Route::get('bills/create', 'ap_invoices_allController@create')
 	->name('bills.create');
 
+	 Route::get('bills/{bill}', 'ap_invoices_allController@show')
+	->name('bills.show');
 
-    Route::put('bills/{role}', 'ap_invoices_allController@update')
+
+    Route::put('bills/{bill}', 'ap_invoices_allController@update')
 	->name('bills.update');
    
 
-    Route::get('bills/{role}/edit', 'ap_invoices_allController@edit')
+    Route::get('bills/{bill}/edit', 'ap_invoices_allController@edit')
 	->name('bills.edit');
 
 /**********BILLS****************/

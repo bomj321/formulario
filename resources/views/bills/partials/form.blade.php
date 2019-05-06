@@ -37,7 +37,7 @@
 	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 		<div class="form-group">
 			    {{ Form::label('Vendor_id', 'Proveedores') }}
-				{!! Form::select('Vendor_id',$providers,null,['class' => 'form-control','id'=>'Vendor_id']) !!}
+				{!! Form::select('Vendor_id',$providers,null,['class' => 'form-control','id'=>'Vendor_id','placeholder' => 'Escoje un Proveedor']) !!}
 
 				@foreach($errors->get('Vendor_id') as $message)
 		 			 <div class="alert alert-danger message_error">
@@ -82,7 +82,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="form-group">
 			    {{ Form::label('Invoice_date', 'Fecha de Factura') }}
 				{!! Form::date('Invoice_date', \Carbon\Carbon::now(),['class' => 'form-control']) !!}
@@ -110,6 +110,20 @@
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="form-group">
+			    {{ Form::label('invoice_amount', 'Importe') }}
+				{{ Form::text('invoice_amount', null, ['class' => 'form-control', 'id' => 'invoice_amount']) }}
+
+				@foreach($errors->get('invoice_amount') as $message)
+		 			 <div class="alert alert-danger message_error">
+						<li>{{ $message }}</li>
+					</div>
+				@endforeach
+		</div>
+	</div>
+
+
+	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+		<div class="form-group">
 			    {{ Form::label('exchange_rate', 'Tipo de Cambio') }}
 				{{ Form::text('exchange_rate', 1, ['class' => 'form-control', 'id' => 'exchange_rate','readonly']) }}
 
@@ -121,7 +135,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="form-group">
 			    {{ Form::label('description', 'Glosa') }}
 	            {{ Form::text('description', null, ['class' => 'form-control', 'id' => 'description']) }}

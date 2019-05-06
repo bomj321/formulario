@@ -213,7 +213,6 @@ var plantilla_tabla = `
 <input type='hidden' name='id_uom_input[]' value='${id_uom}'></input>
 <input type='hidden' name='quantity_invoiced_input[]' value='${quantity_invoiced}'></input>
 <input type='hidden' name='quantity_item_input[]' value='${quantity_item}'></input>
-
 </td>
 
 
@@ -246,6 +245,7 @@ $("#form_bills").submit(function(e){
       var ruc              = $('#segment1').val();
       var invoice_num      = $('#Invoice_num').val(); 
       var glosa            = $('#description').val(); 
+      var invoice_amount   = $('#invoice_amount').val();
 
        
     /***INPUTS WITH INFORMATION***/
@@ -265,10 +265,61 @@ $("#form_bills").submit(function(e){
       return false
     }
 
-    
+    if(invoice_amount == ''){
+      toastr.error('Debes Ingresar un Importe');
+      return false
+    }
 
 
-    return false;
+
+    var venta = {
+
+        Client_id                : $('select[name="Client_id"]').val(),
+        document_id              : $('select[name="document_id"]').val(),
+        Vendor_id                : $('select[name="Vendor_id"]').val(),
+        segment1                 : $('input[name="segment1"]').val(),
+        Invoice_num              : $('input[name="Invoice_num"]').val(),
+        Invoice_date             : $('input[name="Invoice_date"]').val(),
+        invoice_currency_code    : $('select[name="invoice_currency_code"]').val(),
+        invoice_amount           : $('input[name="invoice_amount"]').val(),
+        exchange_rate            : $('input[name="exchange_rate"]').val(),
+        description              : $('input[name="description"]').val(),
+
+
+        tax_id_input              : $('input[name="tax_id_input[]"]').map(function(){return $(this).val();}).get(),
+        category_id_input         : $('input[name="category_id_input[]"]').map(function(){return $(this).val();}).get(),
+        inventory_item_id_input   : $('input[name="inventory_item_id_input[]"]').map(function(){return $(this).val();}).get(),
+        item_description_input    : $('input[name="item_description_input[]"]').map(function(){return $(this).val();}).get(),
+        id_uom_input              : $('input[name="id_uom_input[]"]').map(function(){return $(this).val();}).get(),
+        quantity_invoiced_input   : $('input[name="quantity_invoiced_input[]"]').map(function(){return $(this).val();}).get(),
+        quantity_item_input       : $('input[name="quantity_item_input[]"]').map(function(){return $(this).val();}).get(),
+
+    }
+
+ 
+   $.ajax({
+            url: 'store',
+            type:"POST",
+            dataType:'json',
+            data: venta,
+            beforeSend: function() {
+                     toastr.warning('Realizando Venta Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){    
+                toastr.success(resp.message, 'Venta');
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+     return false;
+
   });
 
 
