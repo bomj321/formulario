@@ -152,6 +152,7 @@ $(document).ready(function () {
     }
 
     var total = price_item * quantity_invoiced;
+    $("#quantity_item").val("");
     $("#quantity_item").val(total);
   }
 
@@ -177,7 +178,7 @@ $(document).ready(function () {
   /****FUNCIONES PARA RESUMIR****/
 
 
-  $("#inventory_item_id").change(function () {
+  $('#inventory_item_id').on('change', function () {
     var value = $("#inventory_item_id").val();
     $.ajax({
       type: "POST",
@@ -190,8 +191,34 @@ $(document).ready(function () {
         $("#price_item").val(data.price);
       }
     });
-    sum_total_price();
+    /***DELAY FOR FUNCTION***/
+
+    setTimeout(function () {
+      sum_total_price();
+    }, 1000);
+    /***DELAY FOR FUNCTION***/
   });
+  /*$("#inventory_item_id").change(function() {
+  
+       var value = $("#inventory_item_id").val(); 
+  
+      $.ajax({
+              type: "POST",
+              dataType:'json',
+              url: "inventoryitemid",
+              data: {"id_inventory": value},
+              success:function(data){              
+                  
+                  $("#price_item").val(data.price);
+  
+              }
+          });
+  
+          sum_total_price();
+  
+      
+  });*/
+
   $('#quantity_invoiced').keyup(function () {
     sum_total_price();
   });
@@ -202,7 +229,9 @@ $(document).ready(function () {
     var tax_selected_number = tax_selected.match(/\d/g).join("");
     var category_id = $('#category_id').val();
     var inventory_item_id = $("#inventory_item_id option:selected").text();
+    var item_description = $("#item_description").val();
     var id_uom = $("#id_uom option:selected").text();
+    var id_uom_id = $("#id_uom option:selected").val();
     var quantity_invoiced = $('#quantity_invoiced').val();
     var quantity_item = $('#quantity_item').val();
     var igv = quantity_item * tax_selected_number / 100;
@@ -214,7 +243,7 @@ $(document).ready(function () {
       return false;
     }
 
-    if (id_uom == '') {
+    if (id_uom_id == '') {
       toastr.error('Seleccione una Medida');
       return false;
     }
@@ -226,11 +255,35 @@ $(document).ready(function () {
     /*********PLANTILLA PARA LA TABLA************/
 
 
-    var plantilla_tabla = "\n<tr>\n\n<td class=\"text-center\">\n<strong>".concat(inventory_item_id, "</strong>\n<input type='hidden' name='quantity_invoiced[]' ></input>\n<input type='hidden' name='comentario_venta[]'></input>\n\n</td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_invoiced, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(id_uom, "</strong></td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_item, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(igv, "</strong></td>\n<td class=\"text-center\"><strong>").concat(monto_inafecto, "</strong></td>\n\n\n<td><button type='button' class='btn btn-danger btn-block btn-remove-producto '>Eliminar</button></td>\n\n</tr>\n");
+    var plantilla_tabla = "\n<tr>\n\n<td class=\"text-center\">\n<strong>".concat(inventory_item_id, "</strong>\n<input type='hidden' name='tax_id_input[]' value='").concat(tax_id, "'></input>\n<input type='hidden' name='category_id_input[]' value='").concat(category_id, "'></input>\n<input type='hidden' name='inventory_item_id_input[]' value='").concat(inventory_item_id, "'></input>\n<input type='hidden' name='item_description_input[]' value='").concat(item_description, "'></input>\n<input type='hidden' name='id_uom_input[]' value='").concat(id_uom, "'></input>\n<input type='hidden' name='quantity_invoiced_input[]' value='").concat(quantity_invoiced, "'></input>\n<input type='hidden' name='quantity_item_input[]' value='").concat(quantity_item, "'></input>\n\n</td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_invoiced, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(id_uom, "</strong></td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_item, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(igv, "</strong></td>\n<td class=\"text-center\"><strong>").concat(monto_inafecto, "</strong></td>\n\n\n<td><button type='button' class='btn btn-danger btn-block btn-remove-producto '>Eliminar</button></td>\n\n</tr>\n");
     $("#tbsales tbody").prepend(plantilla_tabla);
     /*********PLANTILLA PARA LA TABLA************/
 
     sumar();
+  });
+  $("#form_bills").submit(function (e) {
+    e.preventDefault();
+    var ruc = $('#segment1').val();
+    var invoice_num = $('#Invoice_num').val();
+    var glosa = $('#description').val();
+    /***INPUTS WITH INFORMATION***/
+
+    if (ruc == '') {
+      toastr.error('Debe Ingresar un RUC');
+      return false;
+    }
+
+    if (invoice_num == '') {
+      toastr.error('Debe Ingresar un numero de factura');
+      return false;
+    }
+
+    if (glosa == '') {
+      toastr.error('Debe escribir una glosa');
+      return false;
+    }
+
+    return false;
   });
   /***JAVASCRIPT OF FORMULARY***/
 });

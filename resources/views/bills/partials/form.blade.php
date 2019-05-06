@@ -155,7 +155,7 @@
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 				<div class="form-group">
 					    {{ Form::label('tax_id', 'Porcentaje de Impuesto') }}
-						{!! Form::select('tax_id',$taxs,null,['class' => 'form-control']) !!}
+						{!! Form::select('tax_id',$taxs,null,['class' => 'form-control', 'id' => 'tax_id']) !!}
 						
 				</div>
 			</div>
@@ -163,7 +163,7 @@
 			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 				<div class="form-group">
 					    {{ Form::label('category_id', 'Categoría') }}
-						{!! Form::select('category_id',$categories,null,['class' => 'form-control']) !!}				
+						{!! Form::select('category_id',$categories,null,['class' => 'form-control', 'id' => 'category_id']) !!}				
 
 				</div>
 			</div>
@@ -191,7 +191,7 @@
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 				<div class="form-group">
 					    {{ Form::label('id_uom', 'Listado de unidades (UM)') }}
-						{!! Form::select('id_uom',$units,null,['class' => 'form-control','placeholder' => 'Escoje una unidad']) !!}
+						{!! Form::select('id_uom',$units,null,['class' => 'form-control','placeholder' => 'Escoje una unidad', 'id' => 'id_uom']) !!}
 						
 				</div>
 			</div>

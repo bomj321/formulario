@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    {{ Form::open(['route' => 'bills.store']) }}
+                    {{ Form::open(['route' => 'bills.store','id'=>'form_bills']) }}
 
                         @include('bills.partials.form')
                         

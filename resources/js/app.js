@@ -77,6 +77,7 @@ function sum_total_price(){
 
     var total = price_item * quantity_invoiced;
 
+    $("#quantity_item").val("");
     $("#quantity_item").val(total);
 }
 
@@ -110,7 +111,33 @@ function sumar(){
 /****FUNCIONES PARA RESUMIR****/
 
 
-$("#inventory_item_id").change(function() {
+
+$('#inventory_item_id').on('change', function() {
+
+  var value = $("#inventory_item_id").val(); 
+
+    $.ajax({
+            type: "POST",
+            dataType:'json',
+            url: "inventoryitemid",
+            data: {"id_inventory": value},
+            success:function(data){              
+                
+                $("#price_item").val(data.price);
+
+            }
+        });
+
+/***DELAY FOR FUNCTION***/    
+
+    setTimeout(function() { 
+        sum_total_price();
+    }, 1000);
+/***DELAY FOR FUNCTION***/
+        
+});
+
+/*$("#inventory_item_id").change(function() {
 
      var value = $("#inventory_item_id").val(); 
 
@@ -129,7 +156,7 @@ $("#inventory_item_id").change(function() {
         sum_total_price();
 
     
-});
+});*/
 
 
 $('#quantity_invoiced').keyup(function(){
@@ -146,7 +173,9 @@ $('#button_add').click(function(){
         var tax_selected_number   = tax_selected.match(/\d/g).join("");
         var category_id           = $('#category_id').val();
         var inventory_item_id     = $("#inventory_item_id option:selected").text();
+        var item_description      = $("#item_description").val();
         var id_uom                = $("#id_uom option:selected").text(); 
+        var id_uom_id             = $("#id_uom option:selected").val();
         var quantity_invoiced     = $('#quantity_invoiced').val(); 
         var quantity_item         = $('#quantity_item').val(); 
         var igv                   = (quantity_item*tax_selected_number)/100;
@@ -160,7 +189,7 @@ $('#button_add').click(function(){
       return false
    }
 
-   if(id_uom == ''){
+   if(id_uom_id == ''){
       toastr.error('Seleccione una Medida');
       return false
    }
@@ -177,8 +206,13 @@ var plantilla_tabla = `
 
 <td class="text-center">
 <strong>${inventory_item_id}</strong>
-<input type='hidden' name='quantity_invoiced[]' ></input>
-<input type='hidden' name='comentario_venta[]'></input>
+<input type='hidden' name='tax_id_input[]' value='${tax_id}'></input>
+<input type='hidden' name='category_id_input[]' value='${category_id}'></input>
+<input type='hidden' name='inventory_item_id_input[]' value='${inventory_item_id}'></input>
+<input type='hidden' name='item_description_input[]' value='${item_description}'></input>
+<input type='hidden' name='id_uom_input[]' value='${id_uom}'></input>
+<input type='hidden' name='quantity_invoiced_input[]' value='${quantity_invoiced}'></input>
+<input type='hidden' name='quantity_item_input[]' value='${quantity_item}'></input>
 
 </td>
 
@@ -200,13 +234,42 @@ var plantilla_tabla = `
 `
 $("#tbsales tbody").prepend(plantilla_tabla);
 
-/*********PLANTILLA PARA LA TABLA************/    
-
-
+/*********PLANTILLA PARA LA TABLA************/  
 
 sumar();
     
 })
+
+$("#form_bills").submit(function(e){
+    e.preventDefault();
+
+      var ruc              = $('#segment1').val();
+      var invoice_num      = $('#Invoice_num').val(); 
+      var glosa            = $('#description').val(); 
+
+       
+    /***INPUTS WITH INFORMATION***/
+
+     if(ruc == ''){
+      toastr.error('Debe Ingresar un RUC');
+      return false
+    }
+
+    if(invoice_num == ''){
+      toastr.error('Debe Ingresar un numero de factura');
+      return false
+    }
+
+    if(glosa == ''){
+      toastr.error('Debe escribir una glosa');
+      return false
+    }
+
+    
+
+
+    return false;
+  });
 
 
 
