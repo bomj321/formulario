@@ -48,7 +48,7 @@ class ap_invoices_allController extends Controller
         $contractors = DB::table('contractors')->pluck('ruc', 'id');
         $rucs = DB::table('po_vendor')->pluck('segment1', 'vendor_id');
         $taxs = DB::table('ap_tax_codes_all')->pluck('name','id');
-        $items = DB::table('inv_items')->pluck('mat_edtc','id');
+        $items = DB::table('inv_item')->pluck('mat_edtc','id');
         $categories = DB::table('inv_category')->pluck('name','id');
         $units = DB::table('inv_uom')->pluck('name','id');
        /****REGISTERS FOR SELECTS*****/
@@ -86,7 +86,7 @@ class ap_invoices_allController extends Controller
         {   
 
         
-        $item = DB::table('inv_items')
+        $item = DB::table('inv_item')
         ->select('list_item_price')
         ->where('id', '=', $request->id_inventory)
         ->first();
@@ -151,11 +151,50 @@ class ap_invoices_allController extends Controller
         return response()->json($data);
     }
 
-    public function pdf(){
-        $data = ['title' => 'Welcome to HDTuto.com'];
+    public function pdf($bill){
+
+    $bill_db = DB::table('ap_invoices_all')
+        ->join('contractors', 'ap_invoices_all.Client_id', '=', 'contractors.id')
+        ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id')
+        ->join('po_vendor', 'ap_invoices_all.Vendor_id', '=', 'po_vendor.vendor_id')
+        ->select('ap_invoices_all.id as id_bill','contractors.razon_social as name_client','ap_document_type.name as name_document','po_vendor.vendor_name as providers_name','ap_invoices_all.*')
+        ->where('ap_invoices_all.id',$bill)
+        ->first(); 
+
+
+    $lines = DB::table('ap_invoice_lines_all')
+    ->join('ap_tax_codes_all', 'ap_invoice_lines_all.tax_id', '=', 'ap_tax_codes_all.id')
+    ->join('inv_category', 'ap_invoice_lines_all.category_id', '=', 'inv_category.id')
+    ->join('inv_item', 'ap_invoice_lines_all.inventory_item_id', '=', 'inv_item.id')
+    ->join('inv_uom', 'ap_invoice_lines_all.id_uom', '=', 'inv_uom.id')    
+    ->select('ap_tax_codes_all.tax_rate as taxrate', 'inv_category.name as name_category', 'inv_item.description as item_description', 'inv_uom.name as unit_item','ap_invoice_lines_all.*')
+    ->where('ap_invoice_lines_all.invoice_id',$bill_db->id_bill)
+    ->get();
+        
+
+        $data = [
+
+            'id_bill'               => $bill_db->id_bill,
+            'name_client'           => $bill_db->name_client,
+            'name_document'         => $bill_db->name_document,
+            'providers_name'        => $bill_db->providers_name,
+            'Invoice_num'           => $bill_db->Invoice_num,
+            'Invoice_date'          => $bill_db->Invoice_date,
+            'invoice_currency_code' => $bill_db->invoice_currency_code,
+            'exchange_rate'         => $bill_db->exchange_rate,
+            'invoice_amount'        => $bill_db->invoice_amount,
+            'description'           => $bill_db->description,
+            'lines'                 => $lines
+
+        ];
         $pdf = PDF::loadView('bills.pdf', $data);
   
         return $pdf->download('bills.pdf');
+
+
+
+
+
     }
 
   

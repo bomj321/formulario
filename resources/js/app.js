@@ -172,7 +172,8 @@ $('#button_add').click(function(){
         var tax_selected          = $("#tax_id option:selected").text();
         var tax_selected_number   = tax_selected.match(/\d/g).join("");
         var category_id           = $('#category_id').val();
-        var inventory_item_id     = $("#inventory_item_id option:selected").text();
+        var inventory_item_id     = $("#inventory_item_id option:selected").val();
+        var inventory_item_text   = $("#inventory_item_id option:selected").text();
         var item_description      = $("#item_description").val();
         var id_uom                = $("#id_uom option:selected").text(); 
         var id_uom_id             = $("#id_uom option:selected").val();
@@ -184,7 +185,7 @@ $('#button_add').click(function(){
        
     /***INPUTS WITH INFORMATION***/
 
-     if(inventory_item_id == ''){
+     if(inventory_item_text == ''){
       toastr.error('Seleccione un Producto');
       return false
    }
@@ -205,12 +206,12 @@ var plantilla_tabla = `
 <tr>
 
 <td class="text-center">
-<strong>${inventory_item_id}</strong>
+<strong>${inventory_item_text}</strong>
 <input type='hidden' name='tax_id_input[]' value='${tax_id}'></input>
 <input type='hidden' name='category_id_input[]' value='${category_id}'></input>
 <input type='hidden' name='inventory_item_id_input[]' value='${inventory_item_id}'></input>
 <input type='hidden' name='item_description_input[]' value='${item_description}'></input>
-<input type='hidden' name='id_uom_input[]' value='${id_uom}'></input>
+<input type='hidden' name='id_uom_input[]' value='${id_uom_id}'></input>
 <input type='hidden' name='quantity_invoiced_input[]' value='${quantity_invoiced}'></input>
 <input type='hidden' name='quantity_item_input[]' value='${quantity_item}'></input>
 </td>
