@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,17 +42,13 @@ class ap_invoices_allController extends Controller
        /****REGISTERS FOR SELECTS*****/
 
         return view('bills.create',compact('document_types','providers','contractors','rucs','taxs','items','categories','units'));
-
-
-
-
-
     }
 
     public function show($client)
     {
        
     }
+
 
     public function vendorid(Request $request)
     {   
@@ -72,8 +69,9 @@ class ap_invoices_allController extends Controller
         return response()->json($data);
     }
 
+
      public function inventoryitemid(Request $request)
-    {   
+        {   
 
         
         $item = DB::table('inv_items')
@@ -92,15 +90,7 @@ class ap_invoices_allController extends Controller
     }
 
 
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
 
@@ -149,11 +139,13 @@ class ap_invoices_allController extends Controller
         return response()->json($data);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ $bill
-     * @return \Illuminate\Http\Response
-     */
+    public function pdf(){
+        $data = ['title' => 'Welcome to HDTuto.com'];
+        $pdf = PDF::loadView('bills.pdf', $data);
+  
+        return $pdf->download('bills.pdf');
+    }
+
+  
     
 }

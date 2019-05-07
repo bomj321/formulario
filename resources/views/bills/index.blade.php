@@ -37,6 +37,10 @@
                                                     <a href="{{ route('bills.show', $bill->id) }}" class="btn btn-success btn-sm">
                                                          <span class="material-icons">visibility</span>
                                                     </a>
+
+                                                    <a href="{{ route('bills.pdf', $bill->id) }}" class="btn btn-danger btn-sm">
+                                                         <span class="material-icons">picture_as_pdf</span>
+                                                    </a>
                                                    
                                                 </td>
                                               </tr>                                        
