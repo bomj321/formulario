@@ -227,7 +227,11 @@ var plantilla_tabla = `
 <td class="text-center"><strong>${monto_inafecto}</strong></td>
 
 
-<td><button type='button' class='btn btn-danger btn-block btn-remove-producto '>Eliminar</button></td>
+<td>
+<a type='button' class="btn btn-danger btn-sm btn-remove-producto">
+    <span class="material-icons">delete</span>
+</a>
+</td>
 
 </tr>
 `
