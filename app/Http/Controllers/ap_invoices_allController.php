@@ -15,7 +15,19 @@ class ap_invoices_allController extends Controller
      */
     public function index()
     {
-    	 $bills = DB::table('ap_invoices_all')->paginate(15);
+
+
+
+        $bills = DB::table('ap_invoices_all')
+                ->join('contractors', 'ap_invoices_all.Client_id', '=', 'contractors.id')
+                ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id')
+                ->join('po_vendor', 'ap_invoices_all.Vendor_id', '=', 'po_vendor.vendor_id')
+                ->select('ap_invoices_all.id as id_bill','contractors.razon_social as name_client','ap_document_type.name as name_document','po_vendor.vendor_name as providers_name')
+                ->paginate(15);
+
+
+
+    	// $bills = DB::table('ap_invoices_all')->paginate(15);
 
     	 return view('bills.index',compact('bills'));
         

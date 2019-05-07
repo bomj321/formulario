@@ -25,20 +25,20 @@
                                    @if(count($bills) > 0)
                                           @foreach ($bills as $bill)
                                               <tr>
-                                                <th scope="row">{{ $bill->id }}</th>
-                                                <td>{{ $bill->Client_id }}</td>
-                                                <td>{{ $bill->document_id }}</td>
-                                                <td>{{ $bill->Vendor_id }}</td>
+                                                <th scope="row">{{ $bill->id_bill }}</th>
+                                                <td>{{ $bill->name_client }}</td>
+                                                <td>{{ $bill->name_document }}</td>
+                                                <td>{{ $bill->providers_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('bills.edit', $bill->id) }}" class="btn btn-info btn-sm">
+                                                    <a href="{{ route('bills.edit', $bill->id_bill) }}" class="btn btn-info btn-sm">
                                                         <span class="material-icons">edit</span>
                                                     </a>
 
-                                                    <a href="{{ route('bills.show', $bill->id) }}" class="btn btn-success btn-sm">
+                                                    <a href="{{ route('bills.show', $bill->id_bill) }}" class="btn btn-success btn-sm">
                                                          <span class="material-icons">visibility</span>
                                                     </a>
 
-                                                    <a href="{{ route('bills.pdf', $bill->id) }}" class="btn btn-danger btn-sm">
+                                                    <a href="{{ route('bills.pdf', $bill->id_bill) }}" class="btn btn-danger btn-sm">
                                                          <span class="material-icons">picture_as_pdf</span>
                                                     </a>
                                                    
