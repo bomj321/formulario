@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<h4 class="btn-outline-danger">Datos Generales de la Factura</h4>
+				<h4 class="text-danger">Datos Generales de la Factura</h4>
 				<hr>
 				<p class="p_factura mb-1"><strong>ID de la Factura:</strong> {{ $id_bill }}</p>
 				<p class="p_factura mb-1"><strong>Nombre del Cliente:</strong> {{ $name_client }}</p>
@@ -49,59 +49,40 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr>
-					      <th scope="row">1</th>
-					      <td>Mark</td>
-					      <td>Otto</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">2</th>
-					      <td>Jacob</td>
-					      <td>Thornton</td>
-					      <td>@fat</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">3</th>
-					      <td>Larry</td>
-					      <td>the Bird</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-
-					    <tr>
-			     			<td colspan="5"></td>
-      			
-			   			 </tr>		   			   
+						<?php $sub_total = 0 ?>
+						<?php $igv_total = 0 ?>
+					  	@foreach($lines as $line)
+						    <tr>
+						      <th scope="row">{{ $line->mat_edtc }}</th>
+						      <td>{{ $line->quantity_invoiced }}</td>
+						      <td>{{ $line->unit_item }}</td>
+						      <td>{{ $line->amount }}</td>
+						      <?php  $sub_total+= $line->amount; ?>
+							  <?php  $igv_total+= ($line->amount * $line->taxrate)/100; ?>
+						      <td>{{ ($line->amount * $line->taxrate)/100 }}</td>
+						      <td>{{ floatval($line->amount) + floatval((($line->amount * $line->taxrate)/100))  }}</td>
+						    </tr>
+						@endforeach 
 
 					    <tr>
 					     <td colspan="5"><strong class="float-right">Total Lineas:</strong></td>
-		      			 <td>25.76</td>
+		      			 <td>{{ $sub_total }}</td>
 					    </tr>
 
 					    <tr>
 					     <td colspan="5"><strong class="float-right">Total igv:</strong></td>
-		      			 <td>33.33</td>
+		      			 <td>{{ $igv_total }}</td>
 					    </tr>
 
 					    <tr>
 					     <td colspan="5"><strong class="float-right">Total Factura:</strong></td>
-		      			 <td>155</td>
+		      			 <td>{{ floatval($sub_total) + floatval($igv_total) }}</td>
 					    </tr>
 
 
 
 					  </tbody>
-				</table>
-				<!--@foreach($lines as $line)
-					<h4 class="btn-outline-danger">{{ $line->taxrate }}</h4>
-					<hr>
-				@endforeach-->
+				</table>				
 			</div>
 		</div>
 		

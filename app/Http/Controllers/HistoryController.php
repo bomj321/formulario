@@ -16,9 +16,9 @@ class HistoryController extends Controller
     {
 
         $histories = DB::table('inv_material_transactions')
-            ->join('inv_items', 'inv_material_transactions.item_id', '=', 'inv_items.id')
+            ->join('inv_item', 'inv_material_transactions.item_id', '=', 'inv_item.id')
             ->join('inv_transaction_types', 'inv_material_transactions.transaction_type_id', '=', 'inv_transaction_types.id')
-            ->select('inv_material_transactions.id as id_history','inv_material_transactions.item_id as item_id','inv_transaction_types.*', 'inv_items.*')
+            ->select('inv_material_transactions.id as id_history','inv_material_transactions.item_id as item_id','inv_transaction_types.*', 'inv_item.*')
             ->groupBy('item_id')  
             ->get();
 

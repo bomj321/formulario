@@ -30,9 +30,9 @@
                                                 <td>{{ $bill->name_document }}</td>
                                                 <td>{{ $bill->providers_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('bills.edit', $bill->id_bill) }}" class="btn btn-info btn-sm">
+                                                    <!--<a href="{{ route('bills.edit', $bill->id_bill) }}" class="btn btn-info btn-sm">
                                                         <span class="material-icons">edit</span>
-                                                    </a>
+                                                    </a>-->
 
                                                     <a href="{{ route('bills.show', $bill->id_bill) }}" class="btn btn-success btn-sm">
                                                          <span class="material-icons">visibility</span>
