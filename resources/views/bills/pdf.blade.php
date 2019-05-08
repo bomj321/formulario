@@ -37,10 +37,71 @@
 
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				@foreach($lines as $line)
+				<table class="table table-striped">
+					  <thead>
+					    <tr>
+					      <th scope="col">#Producto</th>
+					      <th scope="col">Cantidad</th>
+					      <th scope="col">Medida</th>
+					      <th scope="col">Subtotal</th>
+					      <th scope="col">IGV</th>
+					      <th scope="col">Mon. Inafecto</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">1</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@mdo</td>
+					      <td>@mdo</td>
+					      <td>@mdo</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">2</th>
+					      <td>Jacob</td>
+					      <td>Thornton</td>
+					      <td>@fat</td>
+					      <td>@mdo</td>
+					      <td>@mdo</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">3</th>
+					      <td>Larry</td>
+					      <td>the Bird</td>
+					      <td>@twitter</td>
+					      <td>@mdo</td>
+					      <td>@mdo</td>
+					    </tr>
+
+					    <tr>
+			     			<td colspan="5"></td>
+      			
+			   			 </tr>		   			   
+
+					    <tr>
+					     <td colspan="5"><strong class="float-right">Total Lineas:</strong></td>
+		      			 <td>25.76</td>
+					    </tr>
+
+					    <tr>
+					     <td colspan="5"><strong class="float-right">Total igv:</strong></td>
+		      			 <td>33.33</td>
+					    </tr>
+
+					    <tr>
+					     <td colspan="5"><strong class="float-right">Total Factura:</strong></td>
+		      			 <td>155</td>
+					    </tr>
+
+
+
+					  </tbody>
+				</table>
+				<!--@foreach($lines as $line)
 					<h4 class="btn-outline-danger">{{ $line->taxrate }}</h4>
 					<hr>
-				@endforeach
+				@endforeach-->
 			</div>
 		</div>
 		
