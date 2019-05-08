@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ap_invoices_allController extends Controller
 {
@@ -139,7 +141,7 @@ class ap_invoices_allController extends Controller
 
    
     public function store(Request $request)
-    {
+    {     
 
          DB::table('ap_invoices_all')->insert([
                          [
@@ -175,12 +177,24 @@ class ap_invoices_allController extends Controller
                          ]                       
                 ]); 
         }
-      
 
+
+        $files = $request->file('attached_documents');
+        for ($i=0; $i < count($files) ; $i++) { 
+          $storage_file  = time().'-'.$files[$i]->getClientOriginalName();
+          Storage::disk('public')->put($storage_file,File::get($files));
+
+               DB::table('fnd_attached_documents')->insert(
+                 ['pk1_value' => $last_id, 'name_file' => $storage_file,'path_file' =>$storage_file]
+              );
+
+        }    
+     
 
 
          $data = [          
           'message'      => 'Venta Realizada',
+
         ];
 
         return response()->json($data);

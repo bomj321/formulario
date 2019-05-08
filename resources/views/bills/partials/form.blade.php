@@ -1,6 +1,14 @@
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<h5>Cabecera de la Factura</h5>
+			<div class="form-group w-50">
+				    {{ Form::label('attached_documents', 'Documentos Adjuntos') }}
+				    {{ Form::file('attached_documents[]', ['class' => 'form-control', 'id' => 'attached_documents','multiple' => 'true']) }}
+
+
+					
+
+			</div>
 	</div>
 </div>
 <hr>

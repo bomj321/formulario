@@ -245,13 +245,13 @@ sumar();
 })
 
 $("#form_bills").submit(function(e){
-    e.preventDefault();
+ 
+   e.preventDefault();
 
-      var ruc              = $('#segment1').val();
-      var invoice_num      = $('#Invoice_num').val(); 
-      var glosa            = $('#description').val(); 
-      var invoice_amount   = $('#invoice_amount').val();
-
+      var ruc                 = $('#segment1').val();
+      var invoice_num         = $('#Invoice_num').val(); 
+      var glosa               = $('#description').val(); 
+      var invoice_amount      = $('#invoice_amount').val();
        
     /***INPUTS WITH INFORMATION***/
 
@@ -276,8 +276,8 @@ $("#form_bills").submit(function(e){
     }
 
 
-
-    var venta = {
+var parametros = new FormData($("#form_bills")[0]);
+  /*  var venta = {
 
         Client_id                : $('select[name="Client_id"]').val(),
         document_id              : $('select[name="document_id"]').val(),
@@ -289,6 +289,7 @@ $("#form_bills").submit(function(e){
         invoice_amount           : $('input[name="invoice_amount"]').val(),
         exchange_rate            : $('input[name="exchange_rate"]').val(),
         description              : $('input[name="description"]').val(),
+        files                    : $('#attached_documents').val(),
 
 
         tax_id_input              : $('input[name="tax_id_input[]"]').map(function(){return $(this).val();}).get(),
@@ -299,23 +300,24 @@ $("#form_bills").submit(function(e){
         quantity_invoiced_input   : $('input[name="quantity_invoiced_input[]"]').map(function(){return $(this).val();}).get(),
         quantity_item_input       : $('input[name="quantity_item_input[]"]').map(function(){return $(this).val();}).get(),
 
-    }
+    }*/
 
  
    $.ajax({
             url: 'store',
             type:"POST",
-            dataType:'json',
-            data: venta,
+            contentType:false,
+            processData:false,
+            data: parametros,
             beforeSend: function() {
                      toastr.warning('Realizando Venta Espere...');
                      toastr.clear()
               },
                success:function(resp){    
                 toastr.success(resp.message, 'Venta');
-                setTimeout(function(){
+               /* setTimeout(function(){
                    location.reload(); 
-                 }, 2000);
+                 }, 2000);*/
 
             },
             error:function(){
@@ -324,6 +326,9 @@ $("#form_bills").submit(function(e){
 
       });
      return false;
+
+
+
 
   });
 
