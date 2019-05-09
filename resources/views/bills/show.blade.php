@@ -82,6 +82,29 @@
 						</table>				
 					</div>
 				</div>
+
+
+				@if(count($files) > 0) 
+
+                             
+
+                       @foreach($files as $file)                       
+                             
+                                 <div class="form-inline ml-0">
+                                     <div class="form-group mx-sm-3 mb-2">
+                                     	<?php 
+                                     		$string = explode('*', $file->name_file);
+
+                                     	 ?>
+                                            <input type="text" class="form-control" placeholder="{{   $string[1] }}" disabled>
+                                     </div>
+                                    <a href="{{ route('files.download', $file->attached_document_id) }}" type="button" class="btn btn-success mb-2">Descargar</a>
+                                </div> 
+
+                             @endforeach
+                        @else
+                           <h5 class="text-danger"><strong>No hay Archivos en el Expediente...raro</strong></h5>
+                        @endif
 		
                     
                              

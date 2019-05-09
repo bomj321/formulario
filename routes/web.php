@@ -41,6 +41,9 @@ Route::get('/', 'HistoryController@index')->name('histories');
 	 Route::get('bills/{bill}/pdf', 'ap_invoices_allController@pdf')
 	->name('bills.pdf');
 
+	Route::get('bills/{file}/download', 'ap_invoices_allController@download')
+	->name('files.download');
+
 /**********BILLS****************/
 
 /******ROUTE FOR AJAX CALLS******/

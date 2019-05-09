@@ -77,6 +77,11 @@ class ap_invoices_allController extends Controller
     ->select('ap_tax_codes_all.tax_rate as taxrate', 'inv_category.name as name_category', 'inv_item.description as item_description','inv_item.mat_edtc as mat_edtc', 'inv_uom.name as unit_item','ap_invoice_lines_all.*')
     ->where('ap_invoice_lines_all.invoice_id',$bill_db->id_bill)
     ->get();
+
+     $files = DB::table('fnd_attached_documents')
+     ->where('pk1_value', $bill_db->id_bill)
+     ->get();
+
         
 
         $data = [
@@ -91,7 +96,8 @@ class ap_invoices_allController extends Controller
             'exchange_rate'         => $bill_db->exchange_rate,
             'invoice_amount'        => $bill_db->invoice_amount,
             'description'           => $bill_db->description,
-            'lines'                 => $lines
+            'lines'                 => $lines,
+            'files'                 => $files
 
         ];
 
@@ -182,7 +188,7 @@ class ap_invoices_allController extends Controller
 
           $files = $request->file('attached_documents');
                   for ($i=0; $i < count($files) ; $i++) { 
-                    $storage_file  = time().'-'.$files[$i]->getClientOriginalName();
+                    $storage_file  = time().'*'.$files[$i]->getClientOriginalName();
                     Storage::disk('public')->put($storage_file,File::get($files[$i]));
 
                          DB::table('fnd_attached_documents')->insert(
@@ -242,10 +248,17 @@ class ap_invoices_allController extends Controller
   
         return $pdf->download('bills.pdf');
 
+    }
+
+     public function download($file)
+    {
+          $file_bbdd = DB::table('fnd_attached_documents')
+          ->where('attached_document_id', $file)
+          ->first();
 
 
-
-
+          $path = Storage::disk('public')->path($file_bbdd->path_file);
+          return response()->download($path);  
     }
 
   
