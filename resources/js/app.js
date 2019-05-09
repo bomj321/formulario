@@ -53,7 +53,7 @@ $("#Vendor_id").change(function() {
     $.ajax({
             type: "POST",
             dataType:'json',
-            url: "vendorid",
+            url: "/bills/vendorid",
             data: {"id": value},
             success:function(data){
 
@@ -119,7 +119,8 @@ $('#inventory_item_id').on('change', function() {
     $.ajax({
             type: "POST",
             dataType:'json',
-            url: "inventoryitemid",
+
+            url: "/bills/inventoryitemid",
             data: {"id_inventory": value},
             success:function(data){              
                 
@@ -136,27 +137,6 @@ $('#inventory_item_id').on('change', function() {
 /***DELAY FOR FUNCTION***/
         
 });
-
-/*$("#inventory_item_id").change(function() {
-
-     var value = $("#inventory_item_id").val(); 
-
-    $.ajax({
-            type: "POST",
-            dataType:'json',
-            url: "inventoryitemid",
-            data: {"id_inventory": value},
-            success:function(data){              
-                
-                $("#price_item").val(data.price);
-
-            }
-        });
-
-        sum_total_price();
-
-    
-});*/
 
 
 $('#quantity_invoiced').keyup(function(){
@@ -276,35 +256,11 @@ $("#form_bills").submit(function(e){
     }
 
 
-var parametros = new FormData($("#form_bills")[0]);
-  /*  var venta = {
-
-        Client_id                : $('select[name="Client_id"]').val(),
-        document_id              : $('select[name="document_id"]').val(),
-        Vendor_id                : $('select[name="Vendor_id"]').val(),
-        segment1                 : $('input[name="segment1"]').val(),
-        Invoice_num              : $('input[name="Invoice_num"]').val(),
-        Invoice_date             : $('input[name="Invoice_date"]').val(),
-        invoice_currency_code    : $('select[name="invoice_currency_code"]').val(),
-        invoice_amount           : $('input[name="invoice_amount"]').val(),
-        exchange_rate            : $('input[name="exchange_rate"]').val(),
-        description              : $('input[name="description"]').val(),
-        files                    : $('#attached_documents').val(),
-
-
-        tax_id_input              : $('input[name="tax_id_input[]"]').map(function(){return $(this).val();}).get(),
-        category_id_input         : $('input[name="category_id_input[]"]').map(function(){return $(this).val();}).get(),
-        inventory_item_id_input   : $('input[name="inventory_item_id_input[]"]').map(function(){return $(this).val();}).get(),
-        item_description_input    : $('input[name="item_description_input[]"]').map(function(){return $(this).val();}).get(),
-        id_uom_input              : $('input[name="id_uom_input[]"]').map(function(){return $(this).val();}).get(),
-        quantity_invoiced_input   : $('input[name="quantity_invoiced_input[]"]').map(function(){return $(this).val();}).get(),
-        quantity_item_input       : $('input[name="quantity_item_input[]"]').map(function(){return $(this).val();}).get(),
-
-    }*/
+var parametros = new FormData($("#form_bills")[0]); 
 
  
    $.ajax({
-            url: 'store',
+            url: '/bills/store',
             type:"POST",
             contentType:false,
             processData:false,
@@ -315,9 +271,9 @@ var parametros = new FormData($("#form_bills")[0]);
               },
                success:function(resp){    
                 toastr.success(resp.message, 'Venta');
-               /* setTimeout(function(){
+                setTimeout(function(){
                    location.reload(); 
-                 }, 2000);*/
+                 }, 2000);
 
             },
             error:function(){
@@ -332,6 +288,77 @@ var parametros = new FormData($("#form_bills")[0]);
 
   });
 
+/************EDIT**************/
+
+$("#form_bills_edit").submit(function(e){
+ 
+   e.preventDefault();
+
+      var id_bbdd             = $('#id_bill_bbdd').val();
+      var ruc                 = $('#segment1').val();
+      var invoice_num         = $('#Invoice_num').val(); 
+      var glosa               = $('#description').val(); 
+      var invoice_amount      = $('#invoice_amount').val();
+       
+    /***INPUTS WITH INFORMATION***/
+
+     if(ruc == ''){
+      toastr.error('Debe Ingresar un RUC');
+      return false
+    }
+
+    if(invoice_num == ''){
+      toastr.error('Debe Ingresar un numero de factura');
+      return false
+    }
+
+    if(glosa == ''){
+      toastr.error('Debe escribir una glosa');
+      return false
+    }
+
+    if(invoice_amount == ''){
+      toastr.error('Debes Ingresar un Importe');
+      return false
+    }
+
+
+var parametros = new FormData($("#form_bills_edit")[0]); 
+
+ 
+   $.ajax({
+            url: '/bills/'+id_bbdd+'/update',
+            type:"POST",
+            contentType:false,
+            processData:false,
+            data: parametros,
+            beforeSend: function() {
+                     toastr.warning('Realizando Edicion Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){    
+                toastr.success(resp.message, 'Venta');
+                setTimeout(function(){
+                  window.location.replace("/bills");
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+     return false;
+
+
+
+
+  });
+
+
+
+
+/************EDIT**************/
 
 
 

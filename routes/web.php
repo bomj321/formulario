@@ -31,7 +31,7 @@ Route::get('/', 'HistoryController@index')->name('histories');
 	->name('bills.show');
 
 
-    Route::put('bills/{bill}', 'ap_invoices_allController@update')
+    Route::post('bills/{bill}/update', 'ap_invoices_allController@update')
 	->name('bills.update');
    
 

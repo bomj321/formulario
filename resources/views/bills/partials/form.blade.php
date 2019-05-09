@@ -283,9 +283,7 @@
 <!---------------------TABLA DE COMPRAS------------------------>	
 </div>
 
-
-
-
 <div class="form-group">
-	{{ Form::submit('Generar Factura', ['class' => 'btn btn-sm btn-danger']) }}
+        {{ Form::submit('Generar Factura', ['class' => 'btn btn-sm btn-danger']) }}
 </div>
+

@@ -14,7 +14,6 @@
                     <table class="table table-striped table-sm">
                               <thead>
                                 <tr>
-                                  <th scope="col">ID</th>
                                   <th scope="col">Cliente</th>
                                   <th scope="col">Documento</th>
                                   <th scope="col">Vendedor</th>
@@ -25,14 +24,13 @@
                                    @if(count($bills) > 0)
                                           @foreach ($bills as $bill)
                                               <tr>
-                                                <th scope="row">{{ $bill->id_bill }}</th>
                                                 <td>{{ $bill->name_client }}</td>
                                                 <td>{{ $bill->name_document }}</td>
                                                 <td>{{ $bill->providers_name }}</td>
                                                 <td>
-                                                    <!--<a href="{{ route('bills.edit', $bill->id_bill) }}" class="btn btn-info btn-sm">
+                                                    <a href="{{ route('bills.edit', $bill->id_bill) }}" class="btn btn-info btn-sm">
                                                         <span class="material-icons">edit</span>
-                                                    </a>-->
+                                                    </a>
 
                                                     <a href="{{ route('bills.show', $bill->id_bill) }}" class="btn btn-success btn-sm">
                                                          <span class="material-icons">visibility</span>
