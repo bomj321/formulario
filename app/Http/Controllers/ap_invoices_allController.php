@@ -178,24 +178,26 @@ class ap_invoices_allController extends Controller
                 ]); 
         }
 
+        if (!empty($request->file('attached_documents')) ) {
 
-        $files = $request->file('attached_documents');
-        for ($i=0; $i < count($files) ; $i++) { 
-          $storage_file  = time().'-'.$files[$i]->getClientOriginalName();
-          Storage::disk('public')->put($storage_file,File::get($files));
+          $files = $request->file('attached_documents');
+                  for ($i=0; $i < count($files) ; $i++) { 
+                    $storage_file  = time().'-'.$files[$i]->getClientOriginalName();
+                    Storage::disk('public')->put($storage_file,File::get($files[$i]));
 
-               DB::table('fnd_attached_documents')->insert(
-                 ['pk1_value' => $last_id, 'name_file' => $storage_file,'path_file' =>$storage_file]
-              );
-
-        }    
-     
+                         DB::table('fnd_attached_documents')->insert(
+                           ['pk1_value' => $last_id, 'name_file' => $storage_file,'path_file' =>$storage_file,'description' => 'Archivos de Factura','created_by' => $last_id,'last_updated_by'=>$last_id,'updated_at'=>date('Y-m-d'),'created_at'=>date('Y-m-d')]
+                        );
 
 
-         $data = [          
-          'message'      => 'Venta Realizada',
+                 } 
+        }
+          
 
-        ];
+           $data = [          
+            'message'      => 'Venta Realizada',
+
+          ];
 
         return response()->json($data);
     }
