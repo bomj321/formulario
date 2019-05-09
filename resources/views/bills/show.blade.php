@@ -91,7 +91,7 @@
                        @foreach($files as $file)                       
                              
                                  <div class="form-inline ml-0">
-                                     <div class="form-group mx-sm-3 mb-2">
+                                     <div class="form-group mb-2">
                                      	<?php 
                                      		$string = explode('*', $file->name_file);
 
