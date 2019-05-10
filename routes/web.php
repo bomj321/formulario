@@ -46,6 +46,16 @@ Route::get('/', 'HistoryController@index')->name('histories');
 
 /**********BILLS****************/
 
+/******LINES***************/
+
+Route::get('lines', 'LinesController@index')
+	->name('lines.index');
+
+
+
+/******LINES***************/
+
+
 /******ROUTE FOR AJAX CALLS******/
 Route::post('bills/vendorid', 'ap_invoices_allController@vendorid')
 	->name('bills.vendorid');

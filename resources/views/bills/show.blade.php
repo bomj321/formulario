@@ -103,7 +103,7 @@
 
                              @endforeach
                         @else
-                           <h5 class="text-danger"><strong>No hay Archivos en el Expediente...raro</strong></h5>
+                           <h5 class="text-danger"><strong>No hay Archivos Adjuntos.</strong></h5>
                         @endif
 		
                     
