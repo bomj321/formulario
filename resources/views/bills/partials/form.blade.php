@@ -200,7 +200,14 @@
 				</div>
 			</div>
 
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+				<div class="form-group">
+					    {{ Form::label('price_item_input', 'Precio') }}
+			            {{ Form::text('price_item_input', null, ['class' => 'form-control', 'id' => 'price_item_input','disabled']) }}
+				</div>
+			</div>
+
+			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 				<div class="form-group">
 					    {{ Form::label('item_description', 'Descripción') }}
 			            {{ Form::text('item_description', null, ['class' => 'form-control', 'id' => 'item_description']) }}

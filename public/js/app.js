@@ -189,6 +189,7 @@ $(document).ready(function () {
       },
       success: function success(data) {
         $("#price_item").val(data.price);
+        $("#price_item_input").val(data.price);
       }
     });
     /***DELAY FOR FUNCTION***/

@@ -125,6 +125,7 @@ $('#inventory_item_id').on('change', function() {
             success:function(data){              
                 
                 $("#price_item").val(data.price);
+                $("#price_item_input").val(data.price);
 
             }
         });
