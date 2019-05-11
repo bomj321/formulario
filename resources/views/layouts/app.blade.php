@@ -26,10 +26,10 @@
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <!--FOR EXPORT'S BUTTONS-->   
 
-<!--FIXED COLUMNS--> 
+<!--RESPONSIVE COLUMNS--> 
 
-    <script src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
-<!--FIXED COLUMNS-->
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<!--RESPONSIVE COLUMNS-->
 
 <!--TOASTR-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -51,7 +51,7 @@
 <!--BUTTONS AND FIXED COLUMNS-->
 
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.6/css/fixedColumns.dataTables.min.css">    
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">    
 <!--BUTTONS AND FIXED COLUMNS-->
 
 <!--TOASTR CSS-->

@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped display nowrap" id="bills_table">
                               <thead>
                                 <tr>
                                   <th scope="col">Cliente</th>

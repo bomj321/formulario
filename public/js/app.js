@@ -108,20 +108,21 @@ $(document).ready(function () {
     },
     dom: 'Bfrtip',
     buttons: ['excel'],
-    scrollY: "300px",
-    scrollX: true,
-    scrollCollapse: true,
-    paging: false,
-    fixedColumns: {
-      leftColumns: 2
-    }
+    responsive: true
   });
   $('#lines_all').DataTable({
     "language": {
       "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
     },
     dom: 'Bfrtip',
-    buttons: ['excel']
+    buttons: ['excel'],
+    responsive: true
+  });
+  $('#bills_table').DataTable({
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+    },
+    responsive: true
   });
   /***JAVASCRIPT OF FORMULARY***/
 

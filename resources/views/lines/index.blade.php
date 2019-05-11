@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-striped table-sm" id="lines_all">
+                    <table class="table table-striped table-sm display nowrap" id="lines_all">
                               <thead>
                                 <tr>
                                   <th scope="col">#Factura</th>

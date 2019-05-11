@@ -26,7 +26,7 @@
 
                                  @foreach ($histories as $history)
                                         <tr>
-                                              <th>{{ $history->mat_edtc }}</th>
+                                              <th scope="row">{{ $history->mat_edtc }}</th>
                                               <th>{{ $history->description }}</th>
                                               <?php $sum_total = 0 ?>
                                               @foreach($transanction_types as $transanction_type)

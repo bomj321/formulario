@@ -40,16 +40,6 @@
   color: white !important;
 }
 
-th,
-td {
-  white-space: nowrap;
-}
-
-div.dataTables_wrapper {
-  width: 800px;
-  margin: 0 auto;
-}
-
 .button-add {
   margin-top: 30px;
 }
