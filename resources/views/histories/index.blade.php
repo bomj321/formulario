@@ -20,10 +20,6 @@
                                      <th>{{ $transanction_type->name }}</th>
                                     @endforeach
                                     <th>Total de Transacciones</th>
-                                   
-
-
-
                                 </tr>
                               </thead>
                               <tbody>

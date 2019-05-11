@@ -116,6 +116,13 @@ $(document).ready(function () {
       leftColumns: 2
     }
   });
+  $('#lines_all').DataTable({
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+    },
+    dom: 'Bfrtip',
+    buttons: ['excel']
+  });
   /***JAVASCRIPT OF FORMULARY***/
 
   $("#invoice_currency_code").change(function () {
