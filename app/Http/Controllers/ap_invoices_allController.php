@@ -31,7 +31,7 @@ class ap_invoices_allController extends Controller
 
     	// $bills = DB::table('ap_invoices_all')->paginate(15);
 
-    	 return view('bills.index',compact('bills'));
+    	 return view('cp.bills.index',compact('bills'));
         
     }
 
@@ -47,7 +47,7 @@ class ap_invoices_allController extends Controller
     /****REGISTERS FOR SELECTS*****/
         $document_types = DB::table('ap_document_type')->pluck('name', 'id');
         $providers = DB::table('po_vendor')->pluck('vendor_name', 'vendor_id');
-        $contractors = DB::table('contractors')->pluck('ruc', 'id');
+        $contractors = DB::table('contractors')->pluck('razon_social', 'id');
         $rucs = DB::table('po_vendor')->pluck('segment1', 'vendor_id');
         $taxs = DB::table('ap_tax_codes_all')->pluck('name','id');
         $items = DB::table('inv_item')->pluck('mat_edtc','id');
@@ -55,7 +55,7 @@ class ap_invoices_allController extends Controller
         $units = DB::table('inv_uom')->pluck('name','id');
        /****REGISTERS FOR SELECTS*****/
 
-        return view('bills.create',compact('document_types','providers','contractors','rucs','taxs','items','categories','units'));
+        return view('cp.bills.create',compact('document_types','providers','contractors','rucs','taxs','items','categories','units'));
     }
 
     public function show($bill)
@@ -101,7 +101,7 @@ class ap_invoices_allController extends Controller
 
         ];
 
-        return view('bills.show', $data);
+        return view('cp.bills.show', $data);
     }
 
 
@@ -245,9 +245,9 @@ class ap_invoices_allController extends Controller
             'lines'                 => $lines
 
         ];
-        $pdf = PDF::loadView('bills.pdf', $data);
+        $pdf = PDF::loadView('cp.bills.pdf', $data);
   
-        return $pdf->download('bills.pdf');
+        return $pdf->download('factura.pdf');
 
     }
 
@@ -266,7 +266,7 @@ class ap_invoices_allController extends Controller
         /****REGISTERS FOR SELECTS*****/
         $document_types = DB::table('ap_document_type')->pluck('name', 'id');
         $providers = DB::table('po_vendor')->pluck('vendor_name', 'vendor_id');
-        $contractors = DB::table('contractors')->pluck('ruc', 'id');
+        $contractors = DB::table('contractors')->pluck('razon_social', 'id');
         $rucs = DB::table('po_vendor')->pluck('segment1', 'vendor_id');
         $taxs = DB::table('ap_tax_codes_all')->pluck('name','id');
         $items = DB::table('inv_item')->pluck('mat_edtc','id');
@@ -286,7 +286,7 @@ class ap_invoices_allController extends Controller
 
 
 
-        return view('bills.edit',compact('document_types','providers','contractors','rucs','taxs','items','categories','units','bill_db','lines'));        
+        return view('cp.bills.edit',compact('document_types','providers','contractors','rucs','taxs','items','categories','units','bill_db','lines'));        
 
     }
 
