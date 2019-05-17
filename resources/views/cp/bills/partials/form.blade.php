@@ -195,15 +195,15 @@
 					    {{ Form::label('inventory_item_id', 'Inventario') }}
 						{!! Form::select('inventory_item_id',$items,null,['class' => 'form-control','placeholder' => 'Escoje un Articulo']) !!}
 
-						{{ Form::hidden('price_item', null, ['class' => 'form-control', 'id' => 'price_item']) }}
+						
 						
 				</div>
 			</div>
 
 			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 				<div class="form-group">
-					    {{ Form::label('price_item_input', 'Precio') }}
-			            {{ Form::text('price_item_input', null, ['class' => 'form-control', 'id' => 'price_item_input','disabled']) }}
+					    {{ Form::label('price_item', 'Precio') }}
+			            {{ Form::text('price_item', null, ['class' => 'form-control', 'id' => 'price_item']) }}
 				</div>
 			</div>
 

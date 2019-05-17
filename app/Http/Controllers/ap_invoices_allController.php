@@ -180,6 +180,7 @@ class ap_invoices_allController extends Controller
                               'id_uom'             => $request->id_uom_input[$i],
                               'quantity_invoiced'  => $request->quantity_invoiced_input[$i],
                               'amount'             => $request->quantity_item_input[$i],
+                              'unit_price'         => $request->price_item[$i],
                               'created_at'         => date('Y-m-d')                                  
                          ]                       
                 ]); 
@@ -303,36 +304,30 @@ class ap_invoices_allController extends Controller
 
       /***************ELIMINATE REGISTERS*********************/
 
-      DB::table('ap_invoices_all')->where('id', $bill)->delete();
       DB::table('ap_invoice_lines_all')->where('invoice_id', $bill)->delete();
 
       /***************ELIMINATE REGISTERS*********************/
 
-
-           DB::table('ap_invoices_all')->insert([
-                           [
-                               'Client_id'              => $request->Client_id, 
-                               'document_id'            => $request->document_id, 
-                               'Vendor_id'              => $request->Vendor_id, 
-                               'segment1'               => $request->segment1, 
-                               'Invoice_num'            => $request->Invoice_num,
-                               'Invoice_date'           => $request->Invoice_date, 
-                               'invoice_currency_code'  => $request->invoice_currency_code, 
-                               'invoice_amount'         => $request->invoice_amount, 
-                               'exchange_rate'          => $request->exchange_rate, 
-                               'description'            => $request->description,
-                               'exchange_date'          => date('Y-m-d')
-                           ]                       
-              ]);
-
-          /**OBTAIN ID FROM LAST INSERT**/
-              $last_id = DB::getPdo()->lastInsertId();
-          /**OBTAIN ID FROM LAST INSERT**/
+           DB::table('ap_invoices_all')
+            ->where('id', $bill)
+            ->update([
+                   'Client_id'              => $request->Client_id, 
+                   'document_id'            => $request->document_id, 
+                   'Vendor_id'              => $request->Vendor_id, 
+                   'segment1'               => $request->segment1, 
+                   'Invoice_num'            => $request->Invoice_num,
+                   'Invoice_date'           => $request->Invoice_date, 
+                   'invoice_currency_code'  => $request->invoice_currency_code, 
+                   'invoice_amount'         => $request->invoice_amount, 
+                   'exchange_rate'          => $request->exchange_rate, 
+                   'description'            => $request->description,
+            ]);
+       
 
           for ($i=0; $i <count($request->tax_id_input) ; $i++) { 
                   DB::table('ap_invoice_lines_all')->insert([
                            [
-                                'invoice_id'         => $last_id,
+                                'invoice_id'         => $bill,
                                 'tax_id'             => $request->tax_id_input[$i], 
                                 'category_id'        => $request->category_id_input[$i], 
                                 'inventory_item_id'  => $request->inventory_item_id_input[$i], 
@@ -340,6 +335,7 @@ class ap_invoices_allController extends Controller
                                 'id_uom'             => $request->id_uom_input[$i],
                                 'quantity_invoiced'  => $request->quantity_invoiced_input[$i],
                                 'amount'             => $request->quantity_item_input[$i],
+                                'unit_price'         => $request->price_item[$i],
                                 'created_at'         => date('Y-m-d')                                  
                            ]                       
                   ]); 
@@ -353,7 +349,7 @@ class ap_invoices_allController extends Controller
                       Storage::disk('public')->put($storage_file,File::get($files[$i]));
 
                            DB::table('fnd_attached_documents')->insert(
-                             ['pk1_value' => $last_id, 'name_file' => $storage_file,'path_file' =>$storage_file,'description' => 'Archivos de Factura','created_by' => $last_id,'last_updated_by'=>$last_id,'updated_at'=>date('Y-m-d'),'created_at'=>date('Y-m-d')]
+                             ['pk1_value' => $bill, 'name_file' => $storage_file,'path_file' =>$storage_file,'description' => 'Archivos de Factura','created_by' => $bill,'last_updated_by'=>$bill,'updated_at'=>date('Y-m-d'),'created_at'=>date('Y-m-d')]
                           );
 
 

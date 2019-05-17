@@ -188,7 +188,7 @@
 					    {{ Form::label('category_id', 'Categoría') }}
 						{!! Form::select('category_id',$categories,null,['class' => 'form-control', 'id' => 'category_id']) !!}				
 
-				</div>
+			</div>	
 			</div>
 
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -196,15 +196,14 @@
 					    {{ Form::label('inventory_item_id', 'Inventario') }}
 						{!! Form::select('inventory_item_id',$items,null,['class' => 'form-control','placeholder' => 'Escoje un Articulo']) !!}
 
-						{{ Form::hidden('price_item', null, ['class' => 'form-control', 'id' => 'price_item']) }}
 						
 				</div>
 			</div>
 
 			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 				<div class="form-group">
-					    {{ Form::label('price_item_input', 'Precio') }}
-			            {{ Form::text('price_item_input', null, ['class' => 'form-control', 'id' => 'price_item_input','disabled']) }}
+					    {{ Form::label('price_item', 'Precio') }}
+			            {{ Form::text('price_item', null, ['class' => 'form-control', 'id' => 'price_item']) }}
 				</div>
 			</div>
 
@@ -283,6 +282,7 @@
 								<input type='hidden' name='id_uom_input[]' value='{{ $line->id_uom }}'></input>
 								<input type='hidden' name='quantity_invoiced_input[]' value='{{ $line->quantity_invoiced }}'></input>
 								<input type='hidden' name='quantity_item_input[]' value='{{ $line->amount }}'></input>	
+								<input type='hidden' name='price_item[]' value='{{ $line->unit_price }}'></input>
 							</td>
 
 

@@ -185,29 +185,39 @@ $(document).ready(function () {
   }
   /****FUNCIONES PARA RESUMIR****/
 
+  /*$('#inventory_item_id').on('change', function() {
+  
+    var value = $("#inventory_item_id").val(); 
+  
+      $.ajax({
+              type: "POST",
+              dataType:'json',
+  
+              url: "/bills/inventoryitemid",
+              data: {"id_inventory": value},
+              success:function(data){              
+                  
+                  $("#price_item").val(data.price);
+                  $("#price_item_input").val(data.price);
+  
+              }
+          });*/
 
-  $('#inventory_item_id').on('change', function () {
-    var value = $("#inventory_item_id").val();
-    $.ajax({
-      type: "POST",
-      dataType: 'json',
-      url: "/bills/inventoryitemid",
-      data: {
-        "id_inventory": value
-      },
-      success: function success(data) {
-        $("#price_item").val(data.price);
-        $("#price_item_input").val(data.price);
-      }
-    });
-    /***DELAY FOR FUNCTION***/
+  /***DELAY FOR FUNCTION***/
 
-    setTimeout(function () {
+  /*setTimeout(function() { 
       sum_total_price();
-    }, 1000);
-    /***DELAY FOR FUNCTION***/
-  });
+  }, 1000);*/
+
+  /***DELAY FOR FUNCTION***/
+
+  /*});*/
+
+
   $('#quantity_invoiced').keyup(function () {
+    sum_total_price();
+  });
+  $('#price_item').keyup(function () {
     sum_total_price();
   });
   $('#button_add').click(function () {
@@ -223,6 +233,7 @@ $(document).ready(function () {
     var id_uom_id = $("#id_uom option:selected").val();
     var quantity_invoiced = $('#quantity_invoiced').val();
     var quantity_item = $('#quantity_item').val();
+    var price_item = $('#price_item').val();
     var igv = quantity_item * tax_selected_number / 100;
     var monto_inafecto = Number(quantity_item) + Number(igv);
     /***INPUTS WITH INFORMATION***/
@@ -244,7 +255,7 @@ $(document).ready(function () {
     /*********PLANTILLA PARA LA TABLA************/
 
 
-    var plantilla_tabla = "\n<tr>\n\n<td class=\"text-center\">\n<strong>".concat(inventory_item_text, "</strong>\n<input type='hidden' name='tax_id_input[]' value='").concat(tax_id, "'></input>\n<input type='hidden' name='category_id_input[]' value='").concat(category_id, "'></input>\n<input type='hidden' name='inventory_item_id_input[]' value='").concat(inventory_item_id, "'></input>\n<input type='hidden' name='item_description_input[]' value='").concat(item_description, "'></input>\n<input type='hidden' name='id_uom_input[]' value='").concat(id_uom_id, "'></input>\n<input type='hidden' name='quantity_invoiced_input[]' value='").concat(quantity_invoiced, "'></input>\n<input type='hidden' name='quantity_item_input[]' value='").concat(quantity_item, "'></input>\n</td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_invoiced, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(id_uom, "</strong></td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_item, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(igv, "</strong></td>\n<td class=\"text-center\"><strong>").concat(monto_inafecto, "</strong></td>\n\n\n<td>\n<a type='button' class=\"btn btn-danger btn-sm btn-remove-producto\">\n    <span class=\"material-icons\">delete</span>\n</a>\n</td>\n\n</tr>\n");
+    var plantilla_tabla = "\n<tr>\n\n<td class=\"text-center\">\n<strong>".concat(inventory_item_text, "</strong>\n<input type='hidden' name='tax_id_input[]' value='").concat(tax_id, "'></input>\n<input type='hidden' name='category_id_input[]' value='").concat(category_id, "'></input>\n<input type='hidden' name='inventory_item_id_input[]' value='").concat(inventory_item_id, "'></input>\n<input type='hidden' name='item_description_input[]' value='").concat(item_description, "'></input>\n<input type='hidden' name='id_uom_input[]' value='").concat(id_uom_id, "'></input>\n<input type='hidden' name='quantity_invoiced_input[]' value='").concat(quantity_invoiced, "'></input>\n<input type='hidden' name='quantity_item_input[]' value='").concat(quantity_item, "'></input>\n<input type='hidden' name='price_item[]' value='").concat(price_item, "'></input>\n</td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_invoiced, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(id_uom, "</strong></td>\n\n\n<td class=\"text-center\"><strong>").concat(quantity_item, "</strong></td>\n\n<td class=\"text-center\"><strong>").concat(igv, "</strong></td>\n<td class=\"text-center\"><strong>").concat(monto_inafecto, "</strong></td>\n\n\n<td>\n<a type='button' class=\"btn btn-danger btn-sm btn-remove-producto\">\n    <span class=\"material-icons\">delete</span>\n</a>\n</td>\n\n</tr>\n");
     $("#tbsales tbody").prepend(plantilla_tabla);
     /*********PLANTILLA PARA LA TABLA************/
 
@@ -380,8 +391,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Jose Ortega\Desktop\formulario\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Jose Ortega\Desktop\formulario\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Jose Ortega\Desktop\Trabajos\Formulario-Julian\formulario\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Jose Ortega\Desktop\Trabajos\Formulario-Julian\formulario\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

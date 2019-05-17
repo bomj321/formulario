@@ -128,7 +128,7 @@ function sumar(){
 
 
 
-$('#inventory_item_id').on('change', function() {
+/*$('#inventory_item_id').on('change', function() {
 
   var value = $("#inventory_item_id").val(); 
 
@@ -144,19 +144,25 @@ $('#inventory_item_id').on('change', function() {
                 $("#price_item_input").val(data.price);
 
             }
-        });
+        });*/
 
 /***DELAY FOR FUNCTION***/    
 
-    setTimeout(function() { 
+    /*setTimeout(function() { 
         sum_total_price();
-    }, 1000);
+    }, 1000);*/
 /***DELAY FOR FUNCTION***/
         
-});
+/*});*/
 
 
 $('#quantity_invoiced').keyup(function(){
+
+        sum_total_price();
+
+})
+
+$('#price_item').keyup(function(){
 
         sum_total_price();
 
@@ -176,6 +182,7 @@ $('#button_add').click(function(){
         var id_uom_id             = $("#id_uom option:selected").val();
         var quantity_invoiced     = $('#quantity_invoiced').val(); 
         var quantity_item         = $('#quantity_item').val(); 
+        var price_item            = $('#price_item').val();
         var igv                   = (quantity_item*tax_selected_number)/100;
         var monto_inafecto        = Number(quantity_item) + Number(igv);
 
@@ -211,6 +218,7 @@ var plantilla_tabla = `
 <input type='hidden' name='id_uom_input[]' value='${id_uom_id}'></input>
 <input type='hidden' name='quantity_invoiced_input[]' value='${quantity_invoiced}'></input>
 <input type='hidden' name='quantity_item_input[]' value='${quantity_item}'></input>
+<input type='hidden' name='price_item[]' value='${price_item}'></input>
 </td>
 
 
