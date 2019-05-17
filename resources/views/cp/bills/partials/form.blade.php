@@ -133,7 +133,7 @@
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="form-group">
 			    {{ Form::label('exchange_rate', 'Tipo de Cambio') }}
-				{{ Form::text('exchange_rate', 1, ['class' => 'form-control', 'id' => 'exchange_rate','readonly']) }}
+				{{ Form::text('exchange_rate', 1, ['class' => 'form-control', 'id' => 'exchange_rate','readonly','maxlength'=>'5']) }}
 
 				@foreach($errors->get('exchange_rate') as $message)
 		 			 <div class="alert alert-danger message_error">
@@ -190,10 +190,10 @@
 				</div>
 			</div>
 
-			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 				<div class="form-group">
 					    {{ Form::label('inventory_item_id', 'Inventario') }}
-						{!! Form::select('inventory_item_id',$items,null,['class' => 'form-control','placeholder' => 'Escoje un Articulo']) !!}
+						{!! Form::select('inventory_item_id',$items,null,['class' => 'form-control','placeholder' => 'Seleccione']) !!}
 
 						
 						
@@ -207,7 +207,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 				<div class="form-group">
 					    {{ Form::label('item_description', 'Descripción') }}
 			            {{ Form::text('item_description', null, ['class' => 'form-control', 'id' => 'item_description']) }}
@@ -228,7 +228,7 @@
 			<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
 				<div class="form-group">
 					    {{ Form::label('quantity_invoiced', 'Cantidad') }}
-			            {{ Form::text('quantity_invoiced', null, ['class' => 'form-control', 'id' => 'quantity_invoiced']) }}
+			            {{ Form::text('quantity_invoiced', null, ['class' => 'form-control', 'id' => 'quantity_invoiced','maxlength' => '5']) }}
 				</div>
 			</div>
 

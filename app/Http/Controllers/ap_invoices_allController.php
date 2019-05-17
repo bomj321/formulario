@@ -130,7 +130,7 @@ class ap_invoices_allController extends Controller
 
         
         $item = DB::table('inv_item')
-        ->select('list_item_price')
+        ->select('description')
         ->where('id', '=', $request->id_inventory)
         ->first();
 
@@ -138,7 +138,7 @@ class ap_invoices_allController extends Controller
 
        
         $data = [          
-          'price'      => $item->list_item_price
+          'description'      => $item->description
         ];
 
         return response()->json($data);

@@ -128,7 +128,7 @@ function sumar(){
 
 
 
-/*$('#inventory_item_id').on('change', function() {
+$('#inventory_item_id').on('change', function() {
 
   var value = $("#inventory_item_id").val(); 
 
@@ -140,20 +140,12 @@ function sumar(){
             data: {"id_inventory": value},
             success:function(data){              
                 
-                $("#price_item").val(data.price);
-                $("#price_item_input").val(data.price);
+                $("#item_description").val(data.description);               
 
             }
-        });*/
-
-/***DELAY FOR FUNCTION***/    
-
-    /*setTimeout(function() { 
-        sum_total_price();
-    }, 1000);*/
-/***DELAY FOR FUNCTION***/
+        });
         
-/*});*/
+});
 
 
 $('#quantity_invoiced').keyup(function(){

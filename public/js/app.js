@@ -185,35 +185,21 @@ $(document).ready(function () {
   }
   /****FUNCIONES PARA RESUMIR****/
 
-  /*$('#inventory_item_id').on('change', function() {
-  
-    var value = $("#inventory_item_id").val(); 
-  
-      $.ajax({
-              type: "POST",
-              dataType:'json',
-  
-              url: "/bills/inventoryitemid",
-              data: {"id_inventory": value},
-              success:function(data){              
-                  
-                  $("#price_item").val(data.price);
-                  $("#price_item_input").val(data.price);
-  
-              }
-          });*/
 
-  /***DELAY FOR FUNCTION***/
-
-  /*setTimeout(function() { 
-      sum_total_price();
-  }, 1000);*/
-
-  /***DELAY FOR FUNCTION***/
-
-  /*});*/
-
-
+  $('#inventory_item_id').on('change', function () {
+    var value = $("#inventory_item_id").val();
+    $.ajax({
+      type: "POST",
+      dataType: 'json',
+      url: "/bills/inventoryitemid",
+      data: {
+        "id_inventory": value
+      },
+      success: function success(data) {
+        $("#item_description").val(data.description);
+      }
+    });
+  });
   $('#quantity_invoiced').keyup(function () {
     sum_total_price();
   });
