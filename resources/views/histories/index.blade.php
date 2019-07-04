@@ -3,14 +3,14 @@
 
 @section('content')
     <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="panel panel-default">
+                <div class="panel-heading">
                         Seccion de Reportes                
                 </div>
 
-                <div class="card-body">
+                <div class="panel-body">
                     <table class="stripe row-border order-column" id="history_table" style="max-width: 100%;">
                               <thead>
                                 <tr>

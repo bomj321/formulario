@@ -10,13 +10,15 @@
 
 
 
-.navbar-laravel {
+.navbar-laravel
+{
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 
-.buttons-excel{
+.buttons-excel
+{
 	background: green !important;
 	color: white !important;
 }
@@ -24,11 +26,18 @@
 
 
 //STYLES FOR FORM
-.button-add{
-	margin-top: 30px;
+.button-add
+{
+	margin-top: 24px;
 } 
 
-.p_factura{
+.p_factura
+{
 	font-size: 10px;
+}
+
+.panel-heading
+{
+   min-height: 50px !important;
 }
 

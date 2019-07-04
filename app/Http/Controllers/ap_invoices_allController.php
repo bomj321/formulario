@@ -22,7 +22,7 @@ class ap_invoices_allController extends Controller
 
         $bills = DB::table('ap_invoices_all')
                 ->join('contractors', 'ap_invoices_all.Client_id', '=', 'contractors.id')
-                ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id')
+                ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id_doc')
                 ->join('po_vendor', 'ap_invoices_all.Vendor_id', '=', 'po_vendor.vendor_id')
                 ->select('ap_invoices_all.id as id_bill','contractors.razon_social as name_client','ap_document_type.name as name_document','po_vendor.vendor_name as providers_name')
                 ->paginate(15);
@@ -45,7 +45,7 @@ class ap_invoices_allController extends Controller
 
 
     /****REGISTERS FOR SELECTS*****/
-        $document_types = DB::table('ap_document_type')->pluck('name', 'id');
+        $document_types = DB::table('ap_document_type')->pluck('name', 'id_doc');
         $providers = DB::table('po_vendor')->pluck('vendor_name', 'vendor_id');
         $contractors = DB::table('contractors')->pluck('razon_social', 'id');
         $rucs = DB::table('po_vendor')->pluck('segment1', 'vendor_id');
@@ -62,7 +62,7 @@ class ap_invoices_allController extends Controller
     {
        $bill_db = DB::table('ap_invoices_all')
         ->join('contractors', 'ap_invoices_all.Client_id', '=', 'contractors.id')
-        ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id')
+        ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id_doc')
         ->join('po_vendor', 'ap_invoices_all.Vendor_id', '=', 'po_vendor.vendor_id')
         ->select('ap_invoices_all.id as id_bill','contractors.razon_social as name_client','ap_document_type.name as name_document','po_vendor.vendor_name as providers_name','ap_invoices_all.*')
         ->where('ap_invoices_all.id',$bill)
@@ -214,7 +214,7 @@ class ap_invoices_allController extends Controller
 
     $bill_db = DB::table('ap_invoices_all')
         ->join('contractors', 'ap_invoices_all.Client_id', '=', 'contractors.id')
-        ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id')
+        ->join('ap_document_type', 'ap_invoices_all.document_id', '=', 'ap_document_type.id_doc')
         ->join('po_vendor', 'ap_invoices_all.Vendor_id', '=', 'po_vendor.vendor_id')
         ->select('ap_invoices_all.id as id_bill','contractors.razon_social as name_client','ap_document_type.name as name_document','po_vendor.vendor_name as providers_name','ap_invoices_all.*')
         ->where('ap_invoices_all.id',$bill)
@@ -265,7 +265,7 @@ class ap_invoices_allController extends Controller
         ->first(); 
 
         /****REGISTERS FOR SELECTS*****/
-        $document_types = DB::table('ap_document_type')->pluck('name', 'id');
+        $document_types = DB::table('ap_document_type')->pluck('name', 'id_doc');
         $providers = DB::table('po_vendor')->pluck('vendor_name', 'vendor_id');
         $contractors = DB::table('contractors')->pluck('razon_social', 'id');
         $rucs = DB::table('po_vendor')->pluck('segment1', 'vendor_id');

@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="panel panel-default">
+                <div class="panel-heading">
                         Lineas de Facturas  
-                        <a href="" class="btn btn-success float-right">Crear Factura</a>   
+                        <a href="" class="btn btn-success pull-right">Crear Factura</a>   
                 </div>
 
-                <div class="card-body">
+                <div class="panel-body">
                     <table class="table table-striped table-sm display nowrap" id="lines_all">
                               <thead>
                                 <tr>

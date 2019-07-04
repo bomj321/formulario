@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="panel panel-default">
+                <div class="panel-heading">
                         Seccion de Facturas  
-                        <a href="{{ route('bills.create') }}" class="btn btn-success float-right">Crear Factura</a>   
+                        <a href="{{ route('bills.create') }}" class="btn btn-success pull-right">Crear Factura</a>   
                 </div>
 
                 <div class="card-body">
@@ -50,7 +50,7 @@
                                 @endif          
                               </tbody>
                     </table>
-                    <div class="float-right">
+                    <div class="pull-right">
                           {{ $bills->links() }}
                     </div>                    
                 </div>
