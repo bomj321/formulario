@@ -9,7 +9,6 @@
                 <div class="panel-heading">
                         Seccion de Reportes                
                 </div>
-
                 <div class="panel-body">
                     <table class="stripe row-border order-column" id="history_table" style="max-width: 100%;">
                               <thead>
