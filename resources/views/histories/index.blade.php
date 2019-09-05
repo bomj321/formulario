@@ -25,7 +25,7 @@
 
                                  @foreach ($histories as $history)
                                         <tr>
-                                              <th scope="row">{{ $history->mat_edtc }}</th>
+                                              <th scope="row">{{ $history->cod_mat_edtc }}</th>
                                               <th>{{ $history->description }}</th>
                                               <?php $sum_total = 0 ?>
                                               @foreach($transanction_types as $transanction_type)
@@ -34,7 +34,7 @@
                                                             
                                                              $historia = DB::table('inv_material_transactions')
                                                                    ->select(DB::raw('count(transaction_type_id) as transaction_type_count'))
-                                                                   ->where('item_id', '=', $history->item_id)
+                                                                   ->where('pattern_id', '=', $history->patternid)
                                                                    ->where('transaction_type_id','=', $transanction_type->id)
                                                                    ->first(); 
 
